@@ -1,10 +1,13 @@
 package edu.timurmakhmutov.bottomnavstrip.home
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import com.android.volley.Request
@@ -12,13 +15,15 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentHomeBinding
+import edu.timurmakhmutov.bottomnavstrip.isPermissionGranted
 import org.json.JSONException
 import org.json.JSONObject
 
 class HomeFragment : Fragment() {
-    private lateinit var  homePlacesAdapter: HomePlacesAdapter;
+    private lateinit var pLauncher: ActivityResultLauncher<String>
+    private lateinit var  homePlacesAdapter: HomePlacesAdapter
     private var binding: FragmentHomeBinding? = null
-    private lateinit var  model: HomeViewModel;
+    private lateinit var  model: HomeViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,9 +55,24 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //initTopRecycler();
+        checkPermission()
+        //initTopRecycler()
     }
 
+    //проверка разрешений
+    private fun permissionListener(){
+        pLauncher = registerForActivityResult(
+            ActivityResultContracts.
+            RequestPermission()){}
+    }
+    private fun checkPermission(){
+        if (!isPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)){
+            permissionListener()
+            pLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+    //инициализация ресайклера
     private fun initTopRecycler(){
 
     }
@@ -86,4 +106,6 @@ class HomeFragment : Fragment() {
         }
         return titles
     }
+
+
 }
