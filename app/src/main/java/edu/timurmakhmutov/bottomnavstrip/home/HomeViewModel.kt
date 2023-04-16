@@ -4,5 +4,5 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel : ViewModel() {
-    public val liveDataHome = MutableLiveData<List<HomePlaceNames>>()
+    val liveDataHome = MutableLiveData<List<HomePlaceNames>>()
 }

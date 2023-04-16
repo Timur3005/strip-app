@@ -2,14 +2,20 @@ package edu.timurmakhmutov.bottomnavstrip.home
 
 import android.Manifest
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -20,16 +26,20 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class HomeFragment : Fragment() {
+
+    private lateinit var cityTypelist:List<String>
+
     private lateinit var pLauncher: ActivityResultLauncher<String>
     private lateinit var  homePlacesAdapter: HomePlacesAdapter
     private var binding: FragmentHomeBinding? = null
-    private lateinit var  model: HomeViewModel
+    private val model: HomeViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        // Inflate the layout for this fragment
+
         binding!!.homeStartButton.setOnClickListener { findNavController(binding!!.root).navigate(R.id.action_homeFragment_to_stateTripFragment) }
 
 
@@ -50,13 +60,46 @@ class HomeFragment : Fragment() {
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.typeChillSpinnerMain.adapter = adapterCat
+
+        //spinners listeners
+        binding!!.citySpinnerMain.onItemSelectedListener=object :
+            AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
+        binding!!.typeChillSpinnerMain.onItemSelectedListener=object :
+            AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+
+        }
+
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPermission()
-        //initTopRecycler()
+        homeSpinnerChoice("msk","")
+        updateData()
+        initTopRecycler()
+    }
+
+    private fun updateData(){
+        model.liveDataHome.observe(viewLifecycleOwner){
+            homePlacesAdapter.submitList(it)
+        }
     }
 
     //проверка разрешений
@@ -74,7 +117,9 @@ class HomeFragment : Fragment() {
 
     //инициализация ресайклера
     private fun initTopRecycler(){
-
+        binding?.recyclerForTopPlacesHome?.layoutManager = LinearLayoutManager(context)
+        homePlacesAdapter = HomePlacesAdapter()
+        binding?.recyclerForTopPlacesHome?.adapter = homePlacesAdapter
     }
 
     private fun homeSpinnerChoice(location: String, categories: String) {
@@ -90,7 +135,7 @@ class HomeFragment : Fragment() {
         val request = StringRequest(
             Request.Method.GET,
             url,
-            { response -> parseNamesData(response) },
+            { result -> homePlacesAdapter.submitList(parseNamesData(result))},
             { error -> error.printStackTrace() }
         )
         queue.add(request)
@@ -101,7 +146,7 @@ class HomeFragment : Fragment() {
         val namesMainObject = JSONObject(result)
         val names = namesMainObject.getJSONArray("results")
         for (i in 0 until names.length()) {
-            val name = names.getJSONObject(i)
+            val name = names[i] as JSONObject
             titles.add(HomePlaceNames(name.getString("title")))
         }
         return titles
