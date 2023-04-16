@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EnterFragment"
+    android:orientation="vertical"
+    android:background="@drawable/enter"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Авторизация"
+        android:layout_gravity="center_horizontal"
+        android:textSize="32dp"
+        android:textColor="@color/black"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:hint="Логин"
+        android:background="@color/white"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:hint="Пароль"
+        android:background="@color/white"/>
+    <Button
+        android:id="@+id/button_enter"
+        android:layout_width="300dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp"
+        android:text="Войти"
+        android:background="@drawable/shape_for_button"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/button_reg_in_enter"
+        android:layout_width="300dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="40dp"
+        android:text="Регистрация"
+        android:background="@drawable/shape_for_button"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>
