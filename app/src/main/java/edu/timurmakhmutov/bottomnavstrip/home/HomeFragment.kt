@@ -27,7 +27,8 @@ import org.json.JSONObject
 
 class HomeFragment : Fragment() {
 
-    private lateinit var cityTypelist:List<String>
+    private val cityTypelist:List<String> = listOf("","msk","spb","nsk","ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
+    private val chillTypelist:List<String> = listOf()
 
     private lateinit var pLauncher: ActivityResultLauncher<String>
     private lateinit var  homePlacesAdapter: HomePlacesAdapter
@@ -62,10 +63,10 @@ class HomeFragment : Fragment() {
         binding!!.typeChillSpinnerMain.adapter = adapterCat
 
         //spinners listeners
-        binding!!.citySpinnerMain.onItemSelectedListener=object :
+        binding?.citySpinnerMain?.onItemSelectedListener =object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
+                homeSpinnerChoice(cityTypelist[p2],"comedy-club")
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -91,7 +92,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPermission()
-        homeSpinnerChoice("msk","")
+        homeSpinnerChoice("","")
         updateData()
         initTopRecycler()
     }
@@ -151,6 +152,4 @@ class HomeFragment : Fragment() {
         }
         return titles
     }
-
-
 }
