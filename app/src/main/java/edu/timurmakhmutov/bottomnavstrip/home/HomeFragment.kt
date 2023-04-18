@@ -28,12 +28,18 @@ import org.json.JSONObject
 class HomeFragment : Fragment() {
 
     private val cityTypelist:List<String> = listOf("","msk","spb","nsk","ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
-    private val chillTypelist:List<String> = listOf()
+    private val chillTypelist:List<String> = listOf("", "cinema","comedy-club,concert-hall","amusement,bar,brewery,comedy-club,culture","prirodnyj-zapovednik,park,stable","museums","photo-places"
+        ,"bridge,church,fountain,palace,homesteads","attractions,culture",
+    "questroom","park,recreation,suburb,dance-studio",
+        "art-centers,art-space,museums,workshops,theatre","other")
 
     private lateinit var pLauncher: ActivityResultLauncher<String>
     private lateinit var  homePlacesAdapter: HomePlacesAdapter
     private var binding: FragmentHomeBinding? = null
     private val model: HomeViewModel by activityViewModels()
+
+    private var city:String =""
+    private var categories: String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +72,8 @@ class HomeFragment : Fragment() {
         binding?.citySpinnerMain?.onItemSelectedListener =object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                homeSpinnerChoice(cityTypelist[p2],"comedy-club")
+                city = cityTypelist[p2]
+                homeSpinnerChoice(city,categories)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -77,7 +84,8 @@ class HomeFragment : Fragment() {
         binding!!.typeChillSpinnerMain.onItemSelectedListener=object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
+                categories = chillTypelist[p2]
+                homeSpinnerChoice(city,categories)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {

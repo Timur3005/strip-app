@@ -19,18 +19,17 @@
     </string-array>
     <string-array name="categories_array">
         <item></item>
-        <item>Кинопоказы</item>
+        <item>Кинотеатры</item>
         <item>Концерты</item>
         <item>Развлечения</item>
-        <item>Выставки</item>
-        <item>Мода и стиль</item>
-        <item>Фестивали</item>
-        <item>Праздники</item>
-        <item>Вечеринки</item>
+        <item>Природа</item>
+        <item>Музеи</item>
+        <item>Фотоместа</item>
+        <item>Историческая архитектура</item>
+        <item>Главные достопримечательности</item>
         <item>Квесты</item>
         <item>Отдых</item>
-        <item>Спектакли</item>
-        <item>Экскурсии</item>
-        <item>Ярмарки</item>
+        <item>Искусство</item>
+        <item>Прочее</item>
     </string-array>
 </resources>
