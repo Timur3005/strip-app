@@ -16,7 +16,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.CacheDispatcher
 import com.android.volley.Request
+import com.android.volley.toolbox.DiskBasedCache
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import edu.timurmakhmutov.bottomnavstrip.R
@@ -41,10 +43,14 @@ class HomeFragment : Fragment() {
     private var city:String =""
     private var categories: String=""
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding!!.homeStartButton.setOnClickListener { findNavController(binding!!.root).navigate(R.id.action_homeFragment_to_stateTripFragment) }
@@ -68,7 +74,19 @@ class HomeFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding!!.typeChillSpinnerMain.adapter = adapterCat
 
-        //spinners listeners
+
+
+
+        return binding!!.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        checkPermission()
+
+        initTopRecycler()
+
+        //spinners init
         binding?.citySpinnerMain?.onItemSelectedListener =object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -93,21 +111,12 @@ class HomeFragment : Fragment() {
             }
 
         }
-
-        return binding!!.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        checkPermission()
-        homeSpinnerChoice("","")
         updateData()
-        initTopRecycler()
     }
 
     private fun updateData(){
-        model.liveDataHome.observe(viewLifecycleOwner){
-            homePlacesAdapter.submitList(it)
+        model.liveDataHome.observe(viewLifecycleOwner) { places ->
+            homePlacesAdapter.submitList(places)
         }
     }
 
@@ -123,6 +132,7 @@ class HomeFragment : Fragment() {
             pLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
+
 
     //инициализация ресайклера
     private fun initTopRecycler(){
@@ -144,7 +154,8 @@ class HomeFragment : Fragment() {
         val request = StringRequest(
             Request.Method.GET,
             url,
-            { result -> homePlacesAdapter.submitList(parseNamesData(result))},
+            { result -> val places = parseNamesData(result)
+                model.liveDataHome.value = places},
             { error -> error.printStackTrace() }
         )
         queue.add(request)
@@ -160,4 +171,5 @@ class HomeFragment : Fragment() {
         }
         return titles
     }
+
 }
