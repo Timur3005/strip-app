@@ -15,11 +15,13 @@ import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.android.volley.toolbox.DiskBasedCache;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
 import edu.timurmakhmutov.bottomnavstrip.databinding.ActivityMainBinding;
+import okhttp3.Cache;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +43,5 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(activityMainBinding.bottomNavigationView, navController);
         Objects.requireNonNull(getSupportActionBar()).hide();
-
     }
-
 }
