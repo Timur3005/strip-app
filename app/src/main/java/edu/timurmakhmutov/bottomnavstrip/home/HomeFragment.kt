@@ -167,7 +167,7 @@ class HomeFragment : Fragment() {
         val names = namesMainObject.getJSONArray("results")
         for (i in 0 until names.length()) {
             val name = names[i] as JSONObject
-            titles.add(HomePlaceNames(name.getString("title")))
+            titles.add(HomePlaceNames(name.getString("title"),name.getString("id")))
         }
         return titles
     }
