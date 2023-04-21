@@ -21,10 +21,10 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"/>
-        <ImageView
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/image"
             android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_height="200dp"
             android:background="@drawable/shape_text"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"/>
