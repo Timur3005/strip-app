@@ -110,7 +110,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
     }
 
     private fun updateData(){
-        model.liveDataHome.observe(viewLifecycleOwner) { places ->
+        model.liveDataHome.observe(viewLifecycleOwner){ places ->
             homePlacesAdapter.submitList(places)
         }
     }

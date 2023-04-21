@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.squareup.picasso.Picasso
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
 import org.json.JSONObject
 
@@ -54,6 +55,7 @@ class PlaceScreenFragment : Fragment(){
             this?.bodyText?.text = mainObj.getString("description").
             removePrefix("<p>").removeSuffix("</p>")
             this?.title?.text = mainObj.getString("title")
+            Picasso.get().load(imageURI.getString("image")).into(fragmentPlaceScreenBinding?.image)
 
         }
 
