@@ -1,5 +1,6 @@
 package edu.timurmakhmutov.bottomnavstrip.home
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +14,15 @@ import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.HomeTopForRecyclerBinding
 import androidx.fragment.app.activityViewModels
 import androidx.viewbinding.ViewBinding
-class HomePlacesAdapter() : ListAdapter<HomePlaceNames, HomePlacesAdapter.HomeNamesHolder>(Comparator()) {
+class HomePlacesAdapter(val listener: Listener) : ListAdapter<HomePlaceNames, HomePlacesAdapter.HomeNamesHolder>(Comparator()) {
 
     //класс для создания метода заполнения вью информацией с сервера
     class HomeNamesHolder(view: View) : RecyclerView.ViewHolder(view){
         private val binding = HomeTopForRecyclerBinding.bind(view)
-        fun bind(item: HomePlaceNames) = with(binding){
+        fun bind(item: HomePlaceNames, listener: Listener) = with(binding){
             itemHomeTop.text = item.placeName
             itemHomeTop.setOnClickListener {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_homeFragment_to_placeScreenFragment)
+                listener.onClick(item)
             }
         }
     }
@@ -44,7 +44,11 @@ class HomePlacesAdapter() : ListAdapter<HomePlaceNames, HomePlacesAdapter.HomeNa
     }
     //заполнение инфы во вью
     override fun onBindViewHolder(holder: HomeNamesHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
+    }
+
+    interface Listener{
+        fun onClick(item: HomePlaceNames)
     }
 
 }

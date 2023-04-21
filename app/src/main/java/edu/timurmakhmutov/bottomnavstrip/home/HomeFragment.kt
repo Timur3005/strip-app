@@ -2,32 +2,27 @@ package edu.timurmakhmutov.bottomnavstrip.home
 
 import android.Manifest
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.LiveData
 import androidx.navigation.Navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.volley.CacheDispatcher
 import com.android.volley.Request
-import com.android.volley.toolbox.DiskBasedCache
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import edu.timurmakhmutov.bottomnavstrip.PlaceScreenFragment
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentHomeBinding
 import edu.timurmakhmutov.bottomnavstrip.isPermissionGranted
-import org.json.JSONException
 import org.json.JSONObject
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
 
     private val cityTypelist:List<String> = listOf("","msk","spb","nsk","ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
     private val chillTypelist:List<String> = listOf("", "cinema","comedy-club,concert-hall","amusement,bar,brewery,comedy-club,culture","prirodnyj-zapovednik,park,stable","museums","photo-places"
@@ -137,7 +132,7 @@ class HomeFragment : Fragment() {
     //инициализация ресайклера
     private fun initTopRecycler(){
         binding?.recyclerForTopPlacesHome?.layoutManager = LinearLayoutManager(context)
-        homePlacesAdapter = HomePlacesAdapter()
+        homePlacesAdapter = HomePlacesAdapter(this)
         binding?.recyclerForTopPlacesHome?.adapter = homePlacesAdapter
     }
 
@@ -170,6 +165,16 @@ class HomeFragment : Fragment() {
             titles.add(HomePlaceNames(name.getString("title"),name.getString("id")))
         }
         return titles
+    }
+
+    override fun onClick(item: HomePlaceNames) {
+        val fragment = PlaceScreenFragment()
+        val bundle = Bundle()
+        bundle.putString("1",item.placeId)
+        fragment.arguments = bundle
+        val fragmentManager = fragmentManager
+        fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, fragment)?.addToBackStack("")?.commit()
+
     }
 
 }
