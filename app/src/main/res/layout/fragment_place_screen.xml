@@ -46,7 +46,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_text"/>
         <Button
-            android:id="@+id/add_place_screen"
+            android:id="@+id/add_to_like_place_screen"
             android:layout_width="180dp"
             android:layout_height="40dp"
             android:layout_gravity="center_horizontal"
