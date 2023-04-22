@@ -70,8 +70,7 @@ class PlaceScreenFragment : Fragment(){
         val mainObj = JSONObject(result)
         val images = mainObj.getJSONArray("images")
         with(fragmentPlaceScreenBinding){
-            this?.bodyText?.text = mainObj.getString("description").
-            removePrefix("<p>").removeSuffix("</p>").removePrefix("<p>").removeSuffix("</p>")
+            this?.bodyText?.text = mainObj.getString("description").replace("<p>","").replace("</p>","")
             this?.title?.text = mainObj.getString("title")
             for (i in 0 until images.length()){
                 val image = images[i] as JSONObject
@@ -89,7 +88,6 @@ class PlaceScreenFragment : Fragment(){
             url,
             { result -> val comms = setComments(result)
                 model.liveDataCommentsFields.value = comms
-                Log.d("MyTaggg", "res: $result")
             },
             { error -> Log.d("MyTaggg", "error $error") }
         )
@@ -101,8 +99,10 @@ class PlaceScreenFragment : Fragment(){
         val commObjs = mainObj.getJSONArray("results")
         for (i in 0 until commObjs.length()){
             val comm = commObjs[i] as JSONObject
-            list.add(PlaceCommentsFields(comm.getJSONObject("user")
-                .getString("name"), comm.getString("text")))
+            if (comm.getString("text").isNotEmpty()){
+                list.add(PlaceCommentsFields(comm.getJSONObject("user")
+                .getString("name"), ""+comm.getString("text")+""))
+            }
         }
         return list
     }
