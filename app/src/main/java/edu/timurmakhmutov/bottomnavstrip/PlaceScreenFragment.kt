@@ -44,7 +44,9 @@ class PlaceScreenFragment : Fragment(){
         val request = StringRequest(
             Request.Method.GET,
             url,
-            { result -> ImagesURL = setMyData(result)},
+            { result -> ImagesURL = setMyData(result)
+                fragmentPlaceScreenBinding?.image?.adapter = ImagePagerAdapter(ImagesURL)
+            },
             { error -> Log.d("MyTaggg", "error $error") }
         )
         queue.add(request)

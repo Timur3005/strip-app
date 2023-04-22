@@ -25,7 +25,7 @@ class ImagePagerAdapter(private val images: ArrayList<String>) : RecyclerView.Ad
 
     inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val imageView: ImageView = itemView.findViewById(R.id.image)
+        private val imageView: ImageView = itemView.findViewById(R.id.image_view)
 
         fun bind(imageUrl: String) {
             Picasso.get().load(imageUrl).into(imageView)
