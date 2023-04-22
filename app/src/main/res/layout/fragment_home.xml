@@ -91,6 +91,7 @@
             android:background="@drawable/shape_for_button"
             android:text="Старт"
             android:textColor="@color/black"
-            android:textSize="18dp" />
+            android:textSize="18dp"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 </ScrollView>
