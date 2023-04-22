@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.home
+package edu.timurmakhmutov.bottomnavstrip.place_screen
 
 import android.view.LayoutInflater
 import android.view.View

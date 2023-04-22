@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/placeScreenFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.PlaceScreenFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceScreenFragment"
         android:label="fragment_place_screen"
         tools:layout="@layout/fragment_place_screen" />
     <fragment

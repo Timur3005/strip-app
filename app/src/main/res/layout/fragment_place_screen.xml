@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaceScreenFragment"
+    tools:context=".place_screen.PlaceScreenFragment"
     android:orientation="vertical"
     android:background="@drawable/type1">
 
@@ -38,6 +38,13 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_for_comments"
+            android:layout_marginTop="20dp"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/shape_text"/>
         <Button
             android:id="@+id/add_place_screen"
             android:layout_width="180dp"

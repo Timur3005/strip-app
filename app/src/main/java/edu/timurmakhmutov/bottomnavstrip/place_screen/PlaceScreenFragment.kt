@@ -1,22 +1,24 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.place_screen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.squareup.picasso.Picasso
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
-import edu.timurmakhmutov.bottomnavstrip.home.ImagePagerAdapter
+import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
 import org.json.JSONObject
 
 class PlaceScreenFragment : Fragment(){
 
+    private lateinit var commentsAdapter: CommentsAdapter
+    private val model: PlaceViewModel by activityViewModels()
     private lateinit var ImagesURL:ArrayList<String>
     var fragmentPlaceScreenBinding: FragmentPlaceScreenBinding? = null
     override fun onCreateView(
@@ -32,9 +34,21 @@ class PlaceScreenFragment : Fragment(){
         val trueId: String? = arguments?.getString("1")
         if (trueId != null) {
             parsePlace(trueId)
+            parseComments(trueId)
         }
-//        val adapter = ImagePagerAdapter(ImagesURL)
-//        fragmentPlaceScreenBinding?.image?.adapter = adapter
+        initComments()
+        updateData()
+    }
+    private fun updateData(){
+        model.liveDataCommentsFields.observe(viewLifecycleOwner){
+            commentsAdapter.submitList(it)
+        }
+    }
+
+    private fun initComments(){
+        fragmentPlaceScreenBinding?.recyclerForComments?.layoutManager = LinearLayoutManager(context)
+        commentsAdapter = CommentsAdapter()
+        fragmentPlaceScreenBinding?.recyclerForComments?.adapter = commentsAdapter
     }
 
     private fun parsePlace(identification: String){
@@ -63,6 +77,32 @@ class PlaceScreenFragment : Fragment(){
                 val image = images[i] as JSONObject
                 list.add(image.getString("image"))
             }
+        }
+        return list
+    }
+    private fun parseComments(identification: String){
+
+        val url = "https://kudago.com/public-api/v1.4/places/$identification/comments/?lang=&fields=&order_by=&ids="
+        val newQueue = Volley.newRequestQueue(context)
+        val request = StringRequest(
+            Request.Method.GET,
+            url,
+            { result -> val comms = setComments(result)
+                model.liveDataCommentsFields.value = comms
+                Log.d("MyTaggg", "res: $result")
+            },
+            { error -> Log.d("MyTaggg", "error $error") }
+        )
+        newQueue.add(request)
+    }
+    private fun setComments(result: String):ArrayList<PlaceCommentsFields>{
+        val list = ArrayList<PlaceCommentsFields>()
+        val mainObj = JSONObject(result)
+        val commObjs = mainObj.getJSONArray("results")
+        for (i in 0 until commObjs.length()){
+            val comm = commObjs[i] as JSONObject
+            list.add(PlaceCommentsFields(comm.getJSONObject("user")
+                .getString("name"), comm.getString("text")))
         }
         return list
     }
