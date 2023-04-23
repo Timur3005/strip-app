@@ -1,5 +1,6 @@
 package edu.timurmakhmutov.bottomnavstrip.place_screen
 
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
+import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
 import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
 import org.json.JSONObject
@@ -20,6 +23,7 @@ class PlaceScreenFragment : Fragment(){
     private lateinit var commentsAdapter: CommentsAdapter
     private val model: PlaceViewModel by activityViewModels()
     private lateinit var ImagesURL:ArrayList<String>
+    private val tableForDBRepository = TableForDBRepository(Application())
     var fragmentPlaceScreenBinding: FragmentPlaceScreenBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +42,18 @@ class PlaceScreenFragment : Fragment(){
         }
         initComments()
         updateData()
+        fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setOnClickListener {
+            tableForDBRepository.insert(TableForDB(trueId.toString(),
+                fragmentPlaceScreenBinding?.title?.text.toString(),
+                fragmentPlaceScreenBinding?.address?.text.toString(),
+                fragmentPlaceScreenBinding?.bodyText?.text.toString(),
+                fragmentPlaceScreenBinding?.address?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")))
+//            Log.d("MyTaggg", TableForDB(trueId.toString(),
+//                fragmentPlaceScreenBinding?.title?.text.toString(),
+//                fragmentPlaceScreenBinding?.address?.text.toString(),
+//                fragmentPlaceScreenBinding?.bodyText?.text.toString(),
+//                fragmentPlaceScreenBinding?.address?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")).toString())
+        }
     }
     private fun updateData(){
         model.liveDataCommentsFields.observe(viewLifecycleOwner){
@@ -72,6 +88,8 @@ class PlaceScreenFragment : Fragment(){
         with(fragmentPlaceScreenBinding){
             this?.bodyText?.text = mainObj.getString("description").replace("<p>","").replace("</p>","")
             this?.title?.text = mainObj.getString("title")
+            this?.address?.text = mainObj.getString("address")
+            this?.location?.text = locationConvert(mainObj.getString("location"))
             for (i in 0 until images.length()){
                 val image = images[i] as JSONObject
                 list.add(image.getString("image"))
@@ -105,5 +123,22 @@ class PlaceScreenFragment : Fragment(){
             }
         }
         return list
+    }
+    private fun locationConvert(str:String): String{
+        when(str){
+            "spb" -> return "Санкт-Петербург"
+            "msk" -> return "Москва"
+            "nsk" -> return "Новосибирск"
+            "ekb" -> return "Екатеринбург"
+            "nnv" -> return "Нижний Новгород"
+            "kzn" -> return "Казань"
+            "vbg" -> return "Выборг"
+            "smr" -> return "Самара"
+            "krd" -> return "Краснодар"
+            "sochi" -> return "Сочи"
+            "ufa" -> return "Уфа"
+            "krasnoyarsk" -> return "Красноярск"
+        }
+        return ""
     }
 }

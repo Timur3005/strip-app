@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -18,15 +19,18 @@ import android.view.View;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
 import java.util.Objects;
 
+import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB;
+import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository;
 import edu.timurmakhmutov.bottomnavstrip.databinding.ActivityMainBinding;
 import okhttp3.Cache;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding activityMainBinding;
-    private ActivityResultLauncher<String> pLauncher;
+    private TableForDBRepository tableForDBRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +47,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(activityMainBinding.bottomNavigationView, navController);
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        tableForDBRepository = new TableForDBRepository(getApplication());
+//        tableForDBRepository.getAllTables().observe(this, new Observer<List<TableForDB>>() {
+//            @Override
+//            public void onChanged(List<TableForDB> tableForDBS) {
+//
+//            }
+//        });
     }
 }

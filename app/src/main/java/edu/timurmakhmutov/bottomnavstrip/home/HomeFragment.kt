@@ -23,7 +23,8 @@ import org.json.JSONObject
 
 class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
 
-    private val cityTypelist:List<String> = listOf("","msk","spb","nsk","ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
+    private val cityTypelist:List<String> = listOf("","msk","spb","nsk",
+        "ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
     private val chillTypelist:List<String> = listOf("", "cinema","comedy-club,concert-hall","amusement,bar,brewery,comedy-club,culture","prirodnyj-zapovednik,park,stable","museums","photo-places"
         ,"bridge,church,fountain,palace,homesteads","attractions,culture",
     "questroom","park,recreation,suburb,dance-studio",
