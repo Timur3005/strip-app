@@ -171,10 +171,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
         val fragment = PlaceScreenFragment()
         val bundle = Bundle()
         bundle.putString("1",item.placeId)
-        fragment.arguments = bundle
-        val fragmentManager = fragmentManager
-        fragmentManager?.beginTransaction()?.replace(R.id.nav_host_fragment, fragment)?.addToBackStack("")?.commit()
-
+        findNavController(binding!!.root).navigate(R.id.action_homeFragment_to_placeScreenFragment, bundle)
     }
 
 }

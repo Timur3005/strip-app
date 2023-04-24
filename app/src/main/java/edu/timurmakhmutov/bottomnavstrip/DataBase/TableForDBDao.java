@@ -17,4 +17,7 @@ public interface TableForDBDao {
 
     @Query("SELECT * FROM TableForDB")
     LiveData<List<TableForDB>> getAllTables();
+
+    @Query("SELECT * FROM TableForDB WHERE identification=:id")
+    LiveData<TableForDB> getById(String id);
 }

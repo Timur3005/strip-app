@@ -9,6 +9,7 @@ import java.util.List;
 public class TableForDBRepository {
     private TableForDBDao tableForDBDao;
     private LiveData<List<TableForDB>> listLiveData;
+    private LiveData<TableForDB> itemLiveData;
 
     public TableForDBRepository(Application application) {
         TableForDBDataBase db = TableForDBDataBase.getDatabase(application);
@@ -25,5 +26,10 @@ public class TableForDBRepository {
 
     public LiveData<List<TableForDB>> getAllTables(){
         return listLiveData;
+    }
+
+    public LiveData<TableForDB> getById(String id){
+        itemLiveData = tableForDBDao.getById(id);
+        return itemLiveData;
     }
 }

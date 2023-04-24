@@ -1,5 +1,6 @@
 package edu.timurmakhmutov.bottomnavstrip.place_screen
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,12 +9,14 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
+import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
 import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
 import org.json.JSONObject
@@ -24,7 +27,7 @@ class PlaceScreenFragment : Fragment(){
     private val model: PlaceViewModel by activityViewModels()
     private lateinit var ImagesURL:ArrayList<String>
     private val tableForDBRepository = TableForDBRepository(Application())
-    var fragmentPlaceScreenBinding: FragmentPlaceScreenBinding? = null
+    private var fragmentPlaceScreenBinding: FragmentPlaceScreenBinding? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +36,7 @@ class PlaceScreenFragment : Fragment(){
         return fragmentPlaceScreenBinding!!.root
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val trueId: String? = arguments?.getString("1")
@@ -42,13 +46,38 @@ class PlaceScreenFragment : Fragment(){
         }
         initComments()
         updateData()
-        fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setOnClickListener {
-            tableForDBRepository.insert(TableForDB(trueId.toString(),
-                fragmentPlaceScreenBinding?.title?.text.toString(),
-                fragmentPlaceScreenBinding?.address?.text.toString(),
-                fragmentPlaceScreenBinding?.bodyText?.text.toString(),
-                fragmentPlaceScreenBinding?.address?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")))
-        }
+        tableForDBRepository.getById(trueId).observe(viewLifecycleOwner, Observer {
+            if (it == null){
+                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setOnClickListener {
+                    tableForDBRepository.insert(TableForDB(trueId.toString(),
+                        fragmentPlaceScreenBinding?.title?.text.toString(),
+                        fragmentPlaceScreenBinding?.address?.text.toString(),
+                        fragmentPlaceScreenBinding?.bodyText?.text.toString(),
+                        fragmentPlaceScreenBinding?.address?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")))
+                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
+                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundColor(R.color.red)
+                }
+            }
+            else {
+                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
+                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundColor(R.color.red)
+                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setOnClickListener {
+                    tableForDBRepository.delete(
+                        TableForDB(
+                            trueId.toString(),
+                            fragmentPlaceScreenBinding?.title?.text.toString(),
+                            fragmentPlaceScreenBinding?.address?.text.toString(),
+                            fragmentPlaceScreenBinding?.bodyText?.text.toString(),
+                            fragmentPlaceScreenBinding?.address?.text.toString(),
+                            ImagesURL.toString().replace("[", "").replace("]", "")
+                        )
+                    )
+                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Добавить в избранное"
+                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundColor(R.color.button_back)
+
+                }
+            }
+        })
     }
     private fun updateData(){
         model.liveDataCommentsFields.observe(viewLifecycleOwner){
