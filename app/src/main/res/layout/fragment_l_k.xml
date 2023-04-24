@@ -60,7 +60,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="История"
+                android:text="Избранное"
                 android:textSize="18dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_gravity="center_horizontal"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_for_top_in_lk"
+                android:id="@+id/recycler_for_liked_in_lk"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="10dp"/>

@@ -48,11 +48,6 @@ class PlaceScreenFragment : Fragment(){
                 fragmentPlaceScreenBinding?.address?.text.toString(),
                 fragmentPlaceScreenBinding?.bodyText?.text.toString(),
                 fragmentPlaceScreenBinding?.address?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")))
-//            Log.d("MyTaggg", TableForDB(trueId.toString(),
-//                fragmentPlaceScreenBinding?.title?.text.toString(),
-//                fragmentPlaceScreenBinding?.address?.text.toString(),
-//                fragmentPlaceScreenBinding?.bodyText?.text.toString(),
-//                fragmentPlaceScreenBinding?.address?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")).toString())
         }
     }
     private fun updateData(){

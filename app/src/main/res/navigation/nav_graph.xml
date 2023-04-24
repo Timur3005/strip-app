@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/LKFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.LKFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.lk.LKFragment"
         android:label="fragment_l_k"
         tools:layout="@layout/fragment_l_k" >
         <action
