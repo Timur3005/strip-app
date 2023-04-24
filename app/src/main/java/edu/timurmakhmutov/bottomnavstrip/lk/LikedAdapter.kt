@@ -11,11 +11,14 @@ import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.LikedItemBinding
 
-internal class LikedAdapter(): ListAdapter<TableForDB,LikedAdapter.LikedViewHolder>(Comparator()) {
+internal class LikedAdapter(val listener:DBListener): ListAdapter<TableForDB,LikedAdapter.LikedViewHolder>(Comparator()) {
     class LikedViewHolder(view:View): RecyclerView.ViewHolder(view){
         val binding = LikedItemBinding.bind(view)
-        fun bind(item: TableForDB){
+        fun bind(item: TableForDB, listener: DBListener){
             binding.likedTv.text = item.title
+            binding.likedTv.setOnClickListener{
+                listener.dbOnClick(item)
+            }
         }
     }
     class Comparator : DiffUtil.ItemCallback<TableForDB>(){
@@ -36,7 +39,11 @@ internal class LikedAdapter(): ListAdapter<TableForDB,LikedAdapter.LikedViewHold
     }
 
     override fun onBindViewHolder(holder: LikedViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
+    }
+
+    interface DBListener{
+        fun dbOnClick(item: TableForDB)
     }
 
 }

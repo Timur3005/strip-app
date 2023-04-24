@@ -26,11 +26,11 @@
         android:label="fragment_l_k"
         tools:layout="@layout/fragment_l_k" >
         <action
-            android:id="@+id/action_LKFragment_to_placeScreenFragment"
-            app:destination="@id/placeScreenFragment" />
-        <action
             android:id="@+id/action_LKFragment_to_stateTripFragment"
             app:destination="@id/stateTripFragment" />
+        <action
+            android:id="@+id/action_LKFragment_to_placeCardInLKFragment"
+            app:destination="@id/placeCardInLKFragment" />
     </fragment>
     <fragment
         android:id="@+id/stateTripFragment"
@@ -104,4 +104,13 @@
         android:name="edu.timurmakhmutov.bottomnavstrip.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
+    <fragment
+        android:id="@+id/placeCardInLKFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.PlaceCardInLKFragment"
+        android:label="fragment_place_card_in_l_k"
+        tools:layout="@layout/fragment_place_card_in_l_k" >
+        <action
+            android:id="@+id/action_placeCardInLKFragment_to_LKFragment"
+            app:destination="@id/LKFragment" />
+    </fragment>
 </navigation>

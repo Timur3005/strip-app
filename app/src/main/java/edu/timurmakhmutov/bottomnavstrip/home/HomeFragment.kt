@@ -168,7 +168,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
     }
 
     override fun onClick(item: HomePlaceNames) {
-        val fragment = PlaceScreenFragment()
         val bundle = Bundle()
         bundle.putString("1",item.placeId)
         findNavController(binding!!.root).navigate(R.id.action_homeFragment_to_placeScreenFragment, bundle)
