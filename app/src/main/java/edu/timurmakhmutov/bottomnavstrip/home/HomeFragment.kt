@@ -138,7 +138,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
 
     private fun homeSpinnerChoice(location: String, categories: String) {
         val url = "https://kudago.com/public-api/v1.4/places/?lang=" +
-                "&fields=&expand=&order_by=&text_format=&ids=&location=" + location +
+                "&fields=&page_size=100&expand=&order_by=&text_format=text&ids=&location=" + location +
                 "&has_showings=&showing_since=1444385206&showing_until=1444385206" +
                 "&is_free=" +
                 "&categories=" + categories +

@@ -53,7 +53,7 @@ class PlaceScreenFragment : Fragment(){
                         fragmentPlaceScreenBinding?.title?.text.toString(),
                         fragmentPlaceScreenBinding?.address?.text.toString(),
                         fragmentPlaceScreenBinding?.bodyText?.text.toString(),
-                        fragmentPlaceScreenBinding?.address?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")))
+                        fragmentPlaceScreenBinding?.location?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")))
                     fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
                     fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundColor(R.color.red)
                 }
