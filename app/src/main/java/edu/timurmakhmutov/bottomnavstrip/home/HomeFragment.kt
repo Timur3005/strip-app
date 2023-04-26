@@ -20,6 +20,8 @@ import edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceScreenFragment
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentHomeBinding
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
 
