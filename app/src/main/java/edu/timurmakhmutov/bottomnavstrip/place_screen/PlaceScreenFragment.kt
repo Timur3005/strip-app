@@ -23,6 +23,8 @@ import org.json.JSONObject
 
 class PlaceScreenFragment : Fragment(){
 
+    private lateinit var lat:String
+    private lateinit var lon:String
     private lateinit var commentsAdapter: CommentsAdapter
     private val model: PlaceViewModel by activityViewModels()
     private lateinit var ImagesURL:ArrayList<String>
@@ -53,14 +55,15 @@ class PlaceScreenFragment : Fragment(){
                         fragmentPlaceScreenBinding?.title?.text.toString(),
                         fragmentPlaceScreenBinding?.address?.text.toString(),
                         fragmentPlaceScreenBinding?.bodyText?.text.toString(),
-                        fragmentPlaceScreenBinding?.location?.text.toString(), ImagesURL.toString().replace("[","").replace("]", "")))
+                        fragmentPlaceScreenBinding?.location?.text.toString(), ImagesURL.toString().replace("[","").replace("]", ""),lat, lon))
                     fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
-                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundColor(R.color.red)
+                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundResource(R.drawable.shape_for_button)
+
                 }
             }
             else {
                 fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
-                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundColor(R.color.red)
+                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundResource(R.drawable.shape_for_button)
                 fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setOnClickListener {
                     tableForDBRepository.delete(
                         TableForDB(
@@ -69,11 +72,11 @@ class PlaceScreenFragment : Fragment(){
                             fragmentPlaceScreenBinding?.address?.text.toString(),
                             fragmentPlaceScreenBinding?.bodyText?.text.toString(),
                             fragmentPlaceScreenBinding?.address?.text.toString(),
-                            ImagesURL.toString().replace("[", "").replace("]", "")
+                            ImagesURL.toString().replace("[", "").replace("]", ""),
+                            lat, lon
                         )
                     )
                     fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Добавить в избранное"
-                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundColor(R.color.button_back)
 
                 }
             }
@@ -114,6 +117,8 @@ class PlaceScreenFragment : Fragment(){
             this?.title?.text = mainObj.getString("title")
             this?.address?.text = mainObj.getString("address")
             this?.location?.text = locationConvert(mainObj.getString("location"))
+            lat = mainObj.getJSONObject("coords").getString("lat")
+            lon = mainObj.getJSONObject("coords").getString("lon")
             for (i in 0 until images.length()){
                 val image = images[i] as JSONObject
                 list.add(image.getString("image"))

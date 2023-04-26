@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {TableForDB.class}, version = 1)
+@Database(entities = {TableForDB.class}, version = 2)
 public abstract class TableForDBDataBase extends RoomDatabase {
     public abstract TableForDBDao tableForDBDao();
 
@@ -25,7 +25,7 @@ public abstract class TableForDBDataBase extends RoomDatabase {
             synchronized (TableForDBDataBase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    TableForDBDataBase.class, "app_database")
+                                    TableForDBDataBase.class, "app_database").fallbackToDestructiveMigration()
                             .build();
                 }
             }
