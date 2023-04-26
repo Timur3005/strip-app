@@ -3,6 +3,8 @@ package edu.timurmakhmutov.bottomnavstrip
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PointF
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,14 +24,20 @@ import com.yandex.mapkit.directions.driving.DrivingRouter
 import com.yandex.mapkit.directions.driving.DrivingSession
 import com.yandex.mapkit.directions.driving.VehicleOptions
 import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.layers.ObjectEvent
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.IconStyle
 import com.yandex.mapkit.map.MapObjectCollection
+import com.yandex.mapkit.map.RotationType
+import com.yandex.mapkit.user_location.UserLocationObjectListener
+import com.yandex.mapkit.user_location.UserLocationView
 import com.yandex.runtime.Error
+import com.yandex.runtime.image.ImageProvider
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentStateTripBinding
 import kotlinx.android.synthetic.main.fragment_state_trip.*
 
-class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener {
+class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserLocationObjectListener {
     private lateinit var fragmentStateTripBinding: FragmentStateTripBinding
     private var start = Point(55.660496, 37.474543)
     private val end = Point(55.672264, 37.478996)
@@ -95,6 +103,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener {
             fragmentStateTripBinding.mapview.mapWindow
         )
         locationOnMapKit.isVisible = true
+
     }
 
 
@@ -136,5 +145,26 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener {
             }
             drivingSession = drivingRouter.requestRoutes(requestPoints, drivingOptions,vehicleOptions, this)
         })
+    }
+
+    override fun onObjectAdded(p0: UserLocationView) {
+        val picIcon = p0.pin.useCompositeIcon()
+        picIcon.setIcon("icon", ImageProvider.fromResource(context,R.drawable.ic_baseline_mode_of_travel_24),
+            IconStyle().setAnchor(PointF(0f,0f)).setRotationType(RotationType.NO_ROTATION)
+                .setZIndex(0f).setScale(1f)
+        )
+        picIcon.setIcon("pin", ImageProvider.fromResource(context,R.drawable.ic_baseline_mode_of_travel_24),
+            IconStyle().setAnchor(PointF(0f,0f)).setRotationType(RotationType.NO_ROTATION)
+                .setZIndex(0f).setScale(1f)
+        )
+        p0.accuracyCircle.fillColor = Color.RED and -0x66000001
+    }
+
+    override fun onObjectRemoved(p0: UserLocationView) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {
+        TODO("Not yet implemented")
     }
 }
