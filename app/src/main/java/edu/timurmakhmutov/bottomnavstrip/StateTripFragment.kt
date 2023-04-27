@@ -2,7 +2,6 @@ package edu.timurmakhmutov.bottomnavstrip
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import android.graphics.Color
 import android.graphics.PointF
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.collection.arrayMapOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation.findNavController
@@ -18,16 +16,13 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.yandex.mapkit.*
 import com.yandex.mapkit.directions.DirectionsFactory
-import com.yandex.mapkit.directions.driving.DrivingOptions
-import com.yandex.mapkit.directions.driving.DrivingRoute
-import com.yandex.mapkit.directions.driving.DrivingRouter
-import com.yandex.mapkit.directions.driving.DrivingSession
-import com.yandex.mapkit.directions.driving.VehicleOptions
+import com.yandex.mapkit.directions.driving.*
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.ObjectEvent
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.IconStyle
 import com.yandex.mapkit.map.MapObjectCollection
+import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.mapkit.map.RotationType
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
@@ -39,9 +34,8 @@ import kotlinx.android.synthetic.main.fragment_state_trip.*
 
 class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserLocationObjectListener {
     private lateinit var fragmentStateTripBinding: FragmentStateTripBinding
-    private var start = Point(55.660496, 37.474543)
-    private val end = Point(55.672264, 37.478996)
-    private val medium = Point(55.674148, 37.471758)
+    private lateinit var start:Point
+
 
     private val tableForDBRepository = TableForDBRepository(Application())
 
@@ -54,6 +48,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
 
         // Inflate the layout for this fragment
         fragmentStateTripBinding = FragmentStateTripBinding.inflate(inflater, container, false)
@@ -73,10 +68,6 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MapKitFactory.initialize(context)
-        fragmentStateTripBinding.mapview.map.move(
-            CameraPosition(start, 14.0f, 0.0f, 0.0f),
-            Animation(Animation.Type.SMOOTH, 0f),
-            null)
 
         setLocation()
         racoord()
@@ -132,32 +123,28 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
                 start = Point(it.latitude, it.longitude)
+                fragmentStateTripBinding.mapview.map.move(
+                    CameraPosition(start, 14.0f, 0.0f, 0.0f),
+                    Animation(Animation.Type.SMOOTH, 0f),
+                    null)
+                val drivingOptions = DrivingOptions()
+                val vehicleOptions = VehicleOptions()
+                val requestPoints:ArrayList<RequestPoint> = ArrayList()
+                requestPoints.add(RequestPoint(start,RequestPointType.WAYPOINT, null))
+                for (item in result){
+                    val lat = item.lat.toDouble()
+                    val lon = item.lon.toDouble()
+                    requestPoints.add(RequestPoint(Point(lat,lon),RequestPointType.WAYPOINT, null))
+                    mapObjects.addPlacemark(Point(lat,lon)).setIcon(ImageProvider.fromResource(context, R.drawable.ic_baseline_mode_of_travel_24))
+                }
+                drivingSession = drivingRouter.requestRoutes(requestPoints, drivingOptions,vehicleOptions, this)
             }
-            val drivingOptions = DrivingOptions()
-            val vehicleOptions = VehicleOptions()
-            val requestPoints:ArrayList<RequestPoint> = ArrayList()
-            requestPoints.add(RequestPoint(start,RequestPointType.WAYPOINT, null))
-            for (item in result){
-                val lat = item.lat.toDouble()
-                val lon = item.lon.toDouble()
-                Point(lat,lon)
-                requestPoints.add(RequestPoint(Point(lat,lon),RequestPointType.WAYPOINT, null))
-            }
-            drivingSession = drivingRouter.requestRoutes(requestPoints, drivingOptions,vehicleOptions, this)
+
         })
     }
 
     override fun onObjectAdded(p0: UserLocationView) {
-        val picIcon = p0.pin.useCompositeIcon()
-        picIcon.setIcon("icon", ImageProvider.fromResource(context,R.drawable.ic_baseline_mode_of_travel_24),
-            IconStyle().setAnchor(PointF(0f,0f)).setRotationType(RotationType.NO_ROTATION)
-                .setZIndex(0f).setScale(1f)
-        )
-        picIcon.setIcon("pin", ImageProvider.fromResource(context,R.drawable.ic_baseline_mode_of_travel_24),
-            IconStyle().setAnchor(PointF(0f,0f)).setRotationType(RotationType.NO_ROTATION)
-                .setZIndex(0f).setScale(1f)
-        )
-        p0.accuracyCircle.fillColor = Color.RED and -0x66000001
+
     }
 
     override fun onObjectRemoved(p0: UserLocationView) {

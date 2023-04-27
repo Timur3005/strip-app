@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
-@Database(entities = {TableForDB.class}, version = 2)
+@Database(entities = {TableForDB.class}, version = 3)
 public abstract class TableForDBDataBase extends RoomDatabase {
     public abstract TableForDBDao tableForDBDao();
 

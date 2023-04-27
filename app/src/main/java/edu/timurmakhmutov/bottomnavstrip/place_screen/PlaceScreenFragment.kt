@@ -55,7 +55,8 @@ class PlaceScreenFragment : Fragment(){
                         fragmentPlaceScreenBinding?.title?.text.toString(),
                         fragmentPlaceScreenBinding?.address?.text.toString(),
                         fragmentPlaceScreenBinding?.bodyText?.text.toString(),
-                        fragmentPlaceScreenBinding?.location?.text.toString(), ImagesURL.toString().replace("[","").replace("]", ""),lat, lon))
+                        fragmentPlaceScreenBinding?.location?.text.toString(), ImagesURL.toString().replace("[","").replace("]", ""),
+                        lat, lon, 1,0))
                     fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
                     fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundResource(R.drawable.shape_for_button)
 
@@ -73,7 +74,7 @@ class PlaceScreenFragment : Fragment(){
                             fragmentPlaceScreenBinding?.bodyText?.text.toString(),
                             fragmentPlaceScreenBinding?.address?.text.toString(),
                             ImagesURL.toString().replace("[", "").replace("]", ""),
-                            lat, lon
+                            lat, lon, 1, 0
                         )
                     )
                     fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Добавить в избранное"

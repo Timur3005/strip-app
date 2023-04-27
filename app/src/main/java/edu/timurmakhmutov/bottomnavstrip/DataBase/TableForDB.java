@@ -9,7 +9,10 @@ public class TableForDB {
     public TableForDB() {
     }
 
-    public TableForDB(@NonNull String identification, String title, String address, String description, String location, String imageURLs, String lat, String lon) {
+    public TableForDB(@NonNull String identification,
+                      String title, String address, String description, String location,
+                      String imageURLs, String lat, String lon, int inLiked, int inPath)
+    {
         this.identification = identification;
         this.title = title;
         this.address = address;
@@ -18,6 +21,8 @@ public class TableForDB {
         this.imageURLs = imageURLs;
         this.lat = lat;
         this.lon = lon;
+        this.inLiked = inLiked;
+        this.inPath = inPath;
     }
 
     @NonNull
@@ -30,4 +35,6 @@ public class TableForDB {
     public String imageURLs;
     public String lat;
     public String lon;
+    public int inLiked;
+    public int inPath;
 }
