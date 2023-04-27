@@ -28,8 +28,8 @@ public interface TableForDBDao {
     LiveData<TableForDB> getById(String id);
 
     @Query("UPDATE TableForDB SET inPath = :new_path WHERE identification=:given_id")
-    void updatePath(String given_id, String new_path);
+    void updatePath(String given_id, int new_path);
 
     @Query("UPDATE TableForDB SET inLiked = :new_liked WHERE identification=:given_id")
-    void updateLiked(String given_id, String new_liked);
+    void updateLiked(String given_id, int new_liked);
 }

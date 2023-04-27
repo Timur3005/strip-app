@@ -25,7 +25,7 @@ public abstract class TableForDBDataBase extends RoomDatabase {
             synchronized (TableForDBDataBase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    TableForDBDataBase.class, "app_database").fallbackToDestructiveMigration()
+                                    TableForDBDataBase.class, "app_database").fallbackToDestructiveMigration().allowMainThreadQueries()
                             .build();
                 }
             }

@@ -32,10 +32,10 @@ public class TableForDBRepository {
         itemLiveData = tableForDBDao.getById(id);
         return itemLiveData;
     }
-    public void updatePath(String given_id, String new_path){
+    public void updatePath(String given_id, int new_path){
         tableForDBDao.updatePath(given_id, new_path);
     }
-    public void updateLiked(String given_id, String new_liked){
+    public void updateLiked(String given_id, int new_liked){
         tableForDBDao.updateLiked(given_id, new_liked);
     }
     public LiveData<List<TableForDB>> getAllLiked(){

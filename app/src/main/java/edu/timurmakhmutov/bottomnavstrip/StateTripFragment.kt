@@ -131,13 +131,31 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                 val vehicleOptions = VehicleOptions()
                 val requestPoints:ArrayList<RequestPoint> = ArrayList()
                 requestPoints.add(RequestPoint(start,RequestPointType.WAYPOINT, null))
-                for (item in result){
-                    val lat = item.lat.toDouble()
-                    val lon = item.lon.toDouble()
-                    requestPoints.add(RequestPoint(Point(lat,lon),RequestPointType.WAYPOINT, null))
-                    mapObjects.addPlacemark(Point(lat,lon)).setIcon(ImageProvider.fromResource(context, R.drawable.ic_baseline_mode_of_travel_24))
+                if (result.isNotEmpty()) {
+                    for (item in result) {
+                        val lat = item.lat.toDouble()
+                        val lon = item.lon.toDouble()
+                        requestPoints.add(
+                            RequestPoint(
+                                Point(lat, lon),
+                                RequestPointType.WAYPOINT,
+                                null
+                            )
+                        )
+                        mapObjects.addPlacemark(Point(lat, lon)).setIcon(
+                            ImageProvider.fromResource(
+                                context,
+                                R.drawable.ic_baseline_mode_of_travel_24
+                            )
+                        )
+                    }
+                    drivingSession = drivingRouter.requestRoutes(
+                        requestPoints,
+                        drivingOptions,
+                        vehicleOptions,
+                        this
+                    )
                 }
-                drivingSession = drivingRouter.requestRoutes(requestPoints, drivingOptions,vehicleOptions, this)
             }
 
         })

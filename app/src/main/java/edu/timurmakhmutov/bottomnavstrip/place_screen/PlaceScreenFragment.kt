@@ -29,7 +29,7 @@ class PlaceScreenFragment : Fragment(){
     private val model: PlaceViewModel by activityViewModels()
     private lateinit var ImagesURL:ArrayList<String>
     private val tableForDBRepository = TableForDBRepository(Application())
-    private var fragmentPlaceScreenBinding: FragmentPlaceScreenBinding? = null
+    private lateinit var fragmentPlaceScreenBinding: FragmentPlaceScreenBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,37 +48,83 @@ class PlaceScreenFragment : Fragment(){
         }
         initComments()
         updateData()
-        tableForDBRepository.getById(trueId).observe(viewLifecycleOwner, Observer {
-            if (it == null){
-                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setOnClickListener {
-                    tableForDBRepository.insert(TableForDB(trueId.toString(),
-                        fragmentPlaceScreenBinding?.title?.text.toString(),
-                        fragmentPlaceScreenBinding?.address?.text.toString(),
-                        fragmentPlaceScreenBinding?.bodyText?.text.toString(),
-                        fragmentPlaceScreenBinding?.location?.text.toString(), ImagesURL.toString().replace("[","").replace("]", ""),
-                        lat, lon, 1,0))
-                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
-                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundResource(R.drawable.shape_for_button)
-
+        tableForDBRepository.getById(trueId).observe(viewLifecycleOwner, Observer {item->
+            if (item == null) {
+                var liked = 0
+                var path = 0
+                fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
+                    liked = 1
+                    tableForDBRepository.insert(
+                            TableForDB(
+                                trueId.toString(),
+                                fragmentPlaceScreenBinding.title.text.toString(),
+                                fragmentPlaceScreenBinding.address.text.toString(),
+                                fragmentPlaceScreenBinding.bodyText.text.toString(),
+                                fragmentPlaceScreenBinding.location.text.toString(),
+                                ImagesURL.toString().replace("[", "").replace("]", ""),
+                                lat,
+                                lon,
+                                liked,
+                                path
+                            )
+                    )
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
                 }
-            }
-            else {
-                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Удалить из избранного"
-                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setBackgroundResource(R.drawable.shape_for_button)
-                fragmentPlaceScreenBinding?.addToLikePlaceScreen?.setOnClickListener {
-                    tableForDBRepository.delete(
+                fragmentPlaceScreenBinding.addToPath.setOnClickListener {
+                    path = 1
+                    tableForDBRepository.insert(
                         TableForDB(
                             trueId.toString(),
-                            fragmentPlaceScreenBinding?.title?.text.toString(),
-                            fragmentPlaceScreenBinding?.address?.text.toString(),
-                            fragmentPlaceScreenBinding?.bodyText?.text.toString(),
-                            fragmentPlaceScreenBinding?.address?.text.toString(),
+                            fragmentPlaceScreenBinding.title.text.toString(),
+                            fragmentPlaceScreenBinding.address.text.toString(),
+                            fragmentPlaceScreenBinding.bodyText.text.toString(),
+                            fragmentPlaceScreenBinding.location.text.toString(),
                             ImagesURL.toString().replace("[", "").replace("]", ""),
-                            lat, lon, 1, 0
+                            lat,
+                            lon,
+                            liked,
+                            path
                         )
                     )
-                    fragmentPlaceScreenBinding?.addToLikePlaceScreen?.text = "Добавить в избранное"
-
+                    fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                }
+            }
+            else{
+                if (item.inLiked == 0){
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
+                    fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
+                        tableForDBRepository.updateLiked(trueId, 1)
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
+                    }
+                    fragmentPlaceScreenBinding.addToPath.setOnClickListener {
+                        tableForDBRepository.delete(item)
+                        fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                    }
+                }
+                else if(item.inPath == 0){
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
+                    fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                    fragmentPlaceScreenBinding.addToPath.setOnClickListener {
+                        tableForDBRepository.updatePath(trueId, 1)
+                        fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                    }
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
+                        tableForDBRepository.delete(item)
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
+                    }
+                }
+                else{
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
+                    fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                    fragmentPlaceScreenBinding.addToPath.setOnClickListener {
+                        tableForDBRepository.updatePath(trueId, 0)
+                        fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                    }
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
+                        tableForDBRepository.updateLiked(trueId, 0)
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
+                    }
                 }
             }
         })
