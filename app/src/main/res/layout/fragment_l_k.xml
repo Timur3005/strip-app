@@ -20,26 +20,27 @@
             android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:layout_width="350dp"
-            android:layout_height="200dp"
-            android:background="@drawable/shape_text"
+            android:layout_height="307dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_text"
             android:orientation="vertical">
 
             <TextView
-                android:text="Ваш маршрут"
-                android:textSize="18dp"
-                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:text="Ваш маршрут"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_for_trip_in_lk"
                 android:layout_width="match_parent"
-                android:layout_height="138dp"
-                android:paddingTop="10dp"/>
+                android:layout_height="239dp"
+                android:paddingTop="10dp" />
+
             <Button
                 android:id="@+id/start_in_lk"
                 android:layout_width="wrap_content"
@@ -48,7 +49,7 @@
                 android:background="@drawable/shape_for_button"
                 android:text="Старт"
                 android:textColor="@color/black"
-                android:textSize="12dp"/>
+                android:textSize="12dp" />
         </LinearLayout>
 
         <LinearLayout

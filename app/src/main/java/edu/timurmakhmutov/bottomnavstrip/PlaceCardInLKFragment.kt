@@ -39,20 +39,45 @@ class PlaceCardInLKFragment : Fragment() {
             location.text = item.location
             bodyText.text = item.description
             imageInLkPlaceScreen.adapter = ImagePagerAdapter(item.imageURLs.split(", ") as ArrayList<String>)
-            addToLikePlaceScreen.setOnClickListener{
-                    findNavController().navigate(R.id.action_placeCardInLKFragment_to_LKFragment)
-                    tableForDBRepository.delete(item)
-            }
-            if (item.inPath == 1){
+            if (item.inPath == 1 && item.inLiked == 1){
                 addToPath.text = "Удалить из маршрута"
                 addToPath.setOnClickListener {
                     tableForDBRepository.updatePath(realId, 0)
+                }
+                addToLikePlaceScreen.text = "Удалить из избранного"
+                addToLikePlaceScreen.setOnClickListener {
+                    tableForDBRepository.updateLiked(realId, 0)
+                }
+
+            }
+            else if (item.inPath == 1 && item.inLiked == 0){
+                addToPath.text = "Удалить из маршрута"
+                addToPath.setOnClickListener {
+                    tableForDBRepository.updatePath(realId, 0)
+                }
+                addToLikePlaceScreen.text = "Добавить в избранное"
+                addToLikePlaceScreen.setOnClickListener {
+                    tableForDBRepository.updateLiked(realId, 1)
+                }
+            }
+            else if (item.inPath == 0 && item.inLiked == 1){
+                addToPath.text = "Добавить в маршрут"
+                addToPath.setOnClickListener {
+                    tableForDBRepository.updatePath(realId, 1)
+                }
+                addToLikePlaceScreen.text = "Удалить из избранного"
+                addToLikePlaceScreen.setOnClickListener {
+                    tableForDBRepository.updateLiked(realId, 0)
                 }
             }
             else{
                 addToPath.text = "Добавить в маршрут"
                 addToPath.setOnClickListener {
                     tableForDBRepository.updatePath(realId, 1)
+                }
+                addToLikePlaceScreen.text = "Добавить в избранное"
+                addToLikePlaceScreen.setOnClickListener {
+                    tableForDBRepository.updateLiked(realId, 1)
                 }
             }
         }

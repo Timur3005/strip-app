@@ -105,7 +105,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
     }
 
     override fun onDrivingRoutesError(p0: Error) {
-        var error = "Неизвестная ошибка"
+        val error = "Неизвестная ошибка"
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }
 //    private fun submitRequest(){
@@ -119,7 +119,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
 //    }
     @SuppressLint("MissingPermission")
     private fun racoord(){
-        tableForDBRepository.allTables.observe(viewLifecycleOwner, Observer { result->
+        tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer { result->
             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
                 start = Point(it.latitude, it.longitude)

@@ -18,6 +18,7 @@ import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentLKBinding
 class LKFragment : Fragment(),LikedAdapter.DBListener {
     private lateinit var lkBinding: FragmentLKBinding
     private lateinit var likedAdapter: LikedAdapter
+    private lateinit var pathAdapter: LikedAdapter
     private val model: LKViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,20 +34,35 @@ class LKFragment : Fragment(),LikedAdapter.DBListener {
         val tableForDBRepository = TableForDBRepository(Application())
         tableForDBRepository.allLiked.observe(viewLifecycleOwner, Observer { tableForDBS ->
             model.liveDataLiked.value = tableForDBS
-            initRecycler()
-            update()
+            initRecyclerLiked()
+            updateLiked()
+        })
+        tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer {
+            model.liveDataPath.value = it
+            initRecyclerPath()
+            updatePath()
         })
 
 
     }
-    private fun initRecycler(){
+    private fun initRecyclerLiked(){
         likedAdapter = LikedAdapter(this)
         lkBinding.recyclerForLikedInLk.layoutManager = LinearLayoutManager(context)
         lkBinding.recyclerForLikedInLk.adapter = likedAdapter
     }
-    private fun update(){
+    private fun updateLiked(){
         model.liveDataLiked.observe(viewLifecycleOwner){
             likedAdapter.submitList(it)
+        }
+    }
+    private fun initRecyclerPath(){
+        pathAdapter = LikedAdapter(this)
+        lkBinding.recyclerForTripInLk.layoutManager = LinearLayoutManager(context)
+        lkBinding.recyclerForTripInLk.adapter = pathAdapter
+    }
+    private fun updatePath(){
+        model.liveDataPath.observe(viewLifecycleOwner){
+            pathAdapter.submitList(it)
         }
     }
 
