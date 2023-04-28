@@ -43,6 +43,18 @@ class PlaceCardInLKFragment : Fragment() {
                     findNavController().navigate(R.id.action_placeCardInLKFragment_to_LKFragment)
                     tableForDBRepository.delete(item)
             }
+            if (item.inPath == 1){
+                addToPath.text = "Удалить из маршрута"
+                addToPath.setOnClickListener {
+                    tableForDBRepository.updatePath(realId, 0)
+                }
+            }
+            else{
+                addToPath.text = "Добавить в маршрут"
+                addToPath.setOnClickListener {
+                    tableForDBRepository.updatePath(realId, 1)
+                }
+            }
         }
         })
     }

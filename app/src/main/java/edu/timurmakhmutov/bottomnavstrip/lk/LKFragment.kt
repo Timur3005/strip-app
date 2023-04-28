@@ -31,7 +31,7 @@ class LKFragment : Fragment(),LikedAdapter.DBListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val tableForDBRepository = TableForDBRepository(Application())
-        tableForDBRepository.allTables.observe(viewLifecycleOwner, Observer { tableForDBS ->
+        tableForDBRepository.allLiked.observe(viewLifecycleOwner, Observer { tableForDBS ->
             model.liveDataLiked.value = tableForDBS
             initRecycler()
             update()
