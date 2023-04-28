@@ -2,8 +2,6 @@ package edu.timurmakhmutov.bottomnavstrip
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.graphics.Color
-import android.graphics.PointF
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +21,6 @@ import com.yandex.mapkit.map.CameraPosition
 import com.yandex.mapkit.map.IconStyle
 import com.yandex.mapkit.map.MapObjectCollection
 import com.yandex.mapkit.map.PlacemarkMapObject
-import com.yandex.mapkit.map.RotationType
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
 import com.yandex.runtime.Error
@@ -108,15 +105,6 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         val error = "Неизвестная ошибка"
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }
-//    private fun submitRequest(){
-//        val drivingOptions = DrivingOptions()
-//        val vehicleOptions = VehicleOptions()
-//        val requestPoints:ArrayList<RequestPoint> = ArrayList()
-//        requestPoints.add(RequestPoint(start,RequestPointType.WAYPOINT, null))
-//        requestPoints.add(RequestPoint(medium,RequestPointType.WAYPOINT, null))
-//        requestPoints.add(RequestPoint(end,RequestPointType.WAYPOINT, null))
-//        drivingSession = drivingRouter.requestRoutes(requestPoints, drivingOptions,vehicleOptions, this)
-//    }
     @SuppressLint("MissingPermission")
     private fun racoord(){
         tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer { result->
@@ -142,12 +130,10 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                                 null
                             )
                         )
-                        mapObjects.addPlacemark(Point(lat, lon)).setIcon(
-                            ImageProvider.fromResource(
-                                context,
-                                R.drawable.ic_baseline_mode_of_travel_24
-                            )
-                        )
+                        val mark:PlacemarkMapObject = mapObjects.addPlacemark(Point(lat, lon))
+                        mark.opacity = 10000f
+                        mark.setIconStyle(IconStyle())
+                        mark.isDraggable = true
                     }
                     drivingSession = drivingRouter.requestRoutes(
                         requestPoints,
