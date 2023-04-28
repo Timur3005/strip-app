@@ -42,6 +42,13 @@ class LKFragment : Fragment(),LikedAdapter.DBListener {
             initRecyclerPath()
             updatePath()
         })
+        tableForDBRepository.allTables.observe(viewLifecycleOwner, Observer {
+            for (item in it){
+                if (item.inLiked==0 && item.inPath==0){
+                    tableForDBRepository.delete(item)
+                }
+            }
+        })
 
 
     }
