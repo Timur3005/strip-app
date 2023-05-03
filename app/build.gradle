@@ -34,6 +34,8 @@ android {
 
 dependencies {
 
+//    implementation 'ru.dgis.sdk:sdk-full:latest.release'
+
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'

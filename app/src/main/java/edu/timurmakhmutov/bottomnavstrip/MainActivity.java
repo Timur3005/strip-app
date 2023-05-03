@@ -9,8 +9,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.yandex.mapkit.MapKitFactory;
-
 import java.util.Objects;
 
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository;
