@@ -2,6 +2,8 @@ package edu.timurmakhmutov.bottomnavstrip
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.graphics.PointF
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,16 +15,16 @@ import androidx.navigation.Navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.yandex.mapkit.*
+import com.yandex.mapkit.annotations.AnnotationLanguage
 import com.yandex.mapkit.directions.DirectionsFactory
 import com.yandex.mapkit.directions.driving.*
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.ObjectEvent
-import com.yandex.mapkit.map.CameraPosition
-import com.yandex.mapkit.map.IconStyle
-import com.yandex.mapkit.map.MapObjectCollection
-import com.yandex.mapkit.map.PlacemarkMapObject
+import com.yandex.mapkit.map.*
+import com.yandex.mapkit.map.TextStyle.Placement
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
+import com.yandex.runtime.image.ImageProvider
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentStateTripBinding
 import kotlinx.android.synthetic.main.fragment_state_trip.*
@@ -30,7 +32,6 @@ import kotlinx.android.synthetic.main.fragment_state_trip.*
 class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserLocationObjectListener {
     private lateinit var fragmentStateTripBinding: FragmentStateTripBinding
     private lateinit var start:Point
-
 
     private val tableForDBRepository = TableForDBRepository(Application())
 
@@ -49,7 +50,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         fragmentStateTripBinding = FragmentStateTripBinding.inflate(inflater, container, false)
         fragmentStateTripBinding.mapview
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
-        mapObjects = fragmentStateTripBinding.mapview.map.mapObjects.addCollection()
+        mapObjects = fragmentStateTripBinding.mapview.map.mapObjects
 
 
         return fragmentStateTripBinding.root
@@ -109,9 +110,10 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                     CameraPosition(start, 14.0f, 0.0f, 0.0f),
                     Animation(Animation.Type.SMOOTH, 0f),
                     null)
-                val drivingOptions = DrivingOptions()
+                val drivingOptions = DrivingOptions(90.0,1,true,true,true, null,AnnotationLanguage.RUSSIAN)
                 val vehicleOptions = VehicleOptions()
                 val requestPoints:ArrayList<RequestPoint> = ArrayList()
+                val list = ArrayList<Point>()
                 requestPoints.add(RequestPoint(start,RequestPointType.WAYPOINT, null))
                 if (result.isNotEmpty()) {
                     for (item in result) {
@@ -124,10 +126,12 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                                 null
                             )
                         )
-                        val mark:PlacemarkMapObject = mapObjects.addPlacemark(Point(lat, lon))
-                        mark.opacity = 10000f
-                        mark.setIconStyle(IconStyle())
-                        mark.isDraggable = true
+                        val placemark:PlacemarkMapObject = mapObjects.addPlacemark(Point(lat,lon))
+                        placemark.opacity = 100f
+                        placemark.setIcon(ImageProvider.fromResource(context,R.drawable.enter))
+                        placemark.setText(item.title, TextStyle(8.0F,R.color.black, R.color.black,
+                            Placement.BOTTOM, 0F,false,false))
+
                     }
                     drivingSession = drivingRouter.requestRoutes(
                         requestPoints,
@@ -135,7 +139,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                         vehicleOptions,
                         this
                     )
-                }
+                    }
             }
 
         })
