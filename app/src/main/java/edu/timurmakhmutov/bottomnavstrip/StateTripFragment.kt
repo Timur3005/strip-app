@@ -23,8 +23,6 @@ import com.yandex.mapkit.map.MapObjectCollection
 import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
-import com.yandex.runtime.Error
-import com.yandex.runtime.image.ImageProvider
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentStateTripBinding
 import kotlinx.android.synthetic.main.fragment_state_trip.*
@@ -49,11 +47,6 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
 
         // Inflate the layout for this fragment
         fragmentStateTripBinding = FragmentStateTripBinding.inflate(inflater, container, false)
-        fragmentStateTripBinding.stateTripEnd.setOnClickListener {
-            findNavController(
-                fragmentStateTripBinding.root
-            ).navigate(R.id.action_stateTripFragment_to_homeFragment)
-        }
         fragmentStateTripBinding.mapview
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
         mapObjects = fragmentStateTripBinding.mapview.map.mapObjects.addCollection()
@@ -101,7 +94,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         }
     }
 
-    override fun onDrivingRoutesError(p0: Error) {
+    override fun onDrivingRoutesError(p0: com.yandex.runtime.Error) {
         val error = "Неизвестная ошибка"
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }

@@ -38,7 +38,7 @@ class PlaceCardInLKFragment : Fragment() {
             title.text = item.title
             location.text = item.location
             bodyText.text = item.description
-            imageInLkPlaceScreen.adapter = ImagePagerAdapter(item.imageURLs.split(", ") as ArrayList<String>)
+            imageInLkPlaceScreen.adapter = ImagePagerAdapter(ArrayList<String>(item.imageURLs.split(", ")))
             if (item.inPath == 1 && item.inLiked == 1){
                 addToPath.text = "Удалить из маршрута"
                 addToPath.setOnClickListener {
