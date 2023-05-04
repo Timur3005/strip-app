@@ -2,12 +2,11 @@ package edu.timurmakhmutov.bottomnavstrip
 
 import android.app.Application
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceCardInLKBinding
 import edu.timurmakhmutov.bottomnavstrip.place_screen.ImagePagerAdapter
@@ -38,7 +37,7 @@ class PlaceCardInLKFragment : Fragment() {
             title.text = item.title
             location.text = item.location
             bodyText.text = item.description
-            imageInLkPlaceScreen.adapter = ImagePagerAdapter(ArrayList<String>(item.imageURLs.split(", ")))
+            imageInLkPlaceScreen.adapter = ImagePagerAdapter(ArrayList(item.imageURLs.split(", ")))
             if (item.inPath == 1 && item.inLiked == 1){
                 addToPath.text = "Удалить из маршрута"
                 addToPath.setOnClickListener {

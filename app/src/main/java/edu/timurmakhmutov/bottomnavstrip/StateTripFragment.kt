@@ -94,6 +94,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         }
     }
 
+
     override fun onDrivingRoutesError(p0: com.yandex.runtime.Error) {
         val error = "Неизвестная ошибка"
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
