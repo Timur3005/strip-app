@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.yandex.mapkit.*
 import com.yandex.mapkit.annotations.AnnotationLanguage
 import com.yandex.mapkit.directions.DirectionsFactory
@@ -40,6 +41,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
     private lateinit var drivingRouter:DrivingRouter
     private lateinit var drivingSession: DrivingSession
 
+    @SuppressLint("InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +50,12 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
 
         // Inflate the layout for this fragment
         fragmentStateTripBinding = FragmentStateTripBinding.inflate(inflater, container, false)
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val bottomSheetView: View = layoutInflater.inflate(R.layout.bottom_sheet_for_path_in_state_trip_fragment, null)
+        bottomSheetDialog.setContentView(bottomSheetView)
+        fragmentStateTripBinding.activateSheet.setOnClickListener {
+            bottomSheetDialog.show()
+        }
         fragmentStateTripBinding.mapview
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
         mapObjects = fragmentStateTripBinding.mapview.map.mapObjects
@@ -127,10 +135,8 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                             )
                         )
                         val placemark:PlacemarkMapObject = mapObjects.addPlacemark(Point(lat,lon))
-                        placemark.opacity = 100f
-                        placemark.setIcon(ImageProvider.fromResource(context,R.drawable.enter))
-                        placemark.setText(item.title, TextStyle(8.0F,R.color.black, R.color.black,
-                            Placement.BOTTOM, 0F,false,false))
+                        placemark.setIcon(ImageProvider.fromResource(context,R.drawable.placemark),IconStyle(
+                            null,RotationType.ROTATE,10F,false,true,0.08F,null))
 
                     }
                     drivingSession = drivingRouter.requestRoutes(

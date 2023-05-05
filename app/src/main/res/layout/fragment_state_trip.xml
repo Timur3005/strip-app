@@ -10,6 +10,18 @@
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/mapview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="10"/>
+    <TextView
+        android:id="@+id/activate_sheet"
+        android:gravity="center_horizontal"
+        android:background="@color/text_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Маршрут"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
