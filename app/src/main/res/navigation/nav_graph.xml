@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_stateTripFragment_to_placeCardInLKFragment"
             app:destination="@id/placeCardInLKFragment" />
+        <action
+            android:id="@+id/action_stateTripFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentTripFragment"
@@ -116,4 +119,13 @@
             android:id="@+id/action_placeCardInLKFragment_to_LKFragment"
             app:destination="@id/LKFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.BottomSheetFragment"
+        android:label="fragment_bottom_sheet"
+        tools:layout="@layout/fragment_bottom_sheet" >
+        <action
+            android:id="@+id/action_bottomSheetFragment_to_placeCardInLKFragment"
+            app:destination="@id/placeCardInLKFragment" />
+    </dialog>
 </navigation>

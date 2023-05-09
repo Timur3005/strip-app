@@ -39,7 +39,7 @@ import edu.timurmakhmutov.bottomnavstrip.lk.LKViewModel
 import edu.timurmakhmutov.bottomnavstrip.lk.LikedAdapter
 import kotlinx.android.synthetic.main.fragment_state_trip.*
 
-class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserLocationObjectListener,LikedAdapter.DBListener {
+class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserLocationObjectListener{
     private lateinit var fragmentStateTripBinding: FragmentStateTripBinding
     private lateinit var bottomSheetBinding: BottomSheetForPathInStateTripFragmentBinding
     private lateinit var start:Point
@@ -65,16 +65,16 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
 
         // Inflate the layout for this fragment
         fragmentStateTripBinding = FragmentStateTripBinding.inflate(inflater, container, false)
-        bottomSheetDialog = BottomSheetDialog(requireContext())
-        bottomSheetView= layoutInflater.inflate(R.layout.bottom_sheet_for_path_in_state_trip_fragment, null)
+//        bottomSheetDialog = BottomSheetDialog(requireContext())
+//        bottomSheetView= layoutInflater.inflate(R.layout.bottom_sheet_for_path_in_state_trip_fragment, null)
 
         fragmentStateTripBinding.mapview
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
         mapObjects = fragmentStateTripBinding.mapview.map.mapObjects
-        bottomSheetBinding = BottomSheetForPathInStateTripFragmentBinding.bind(bottomSheetView)
-        bottomSheetDialog.setContentView(bottomSheetView)
+//        bottomSheetBinding = BottomSheetForPathInStateTripFragmentBinding.bind(bottomSheetView)
+//        bottomSheetDialog.setContentView(bottomSheetView)
         fragmentStateTripBinding.activateSheet.setOnClickListener {
-            bottomSheetDialog.show()
+            findNavController().navigate(R.id.action_stateTripFragment_to_bottomSheetFragment)
         }
 
         return fragmentStateTripBinding.root
@@ -86,24 +86,24 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
 
         setLocation()
         racoord()
-        tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer {
-            model.liveDataPath.value = it
-            initRecyclerPath()
-            updatePath()
-        })
+//        tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer {
+//            model.liveDataPath.value = it
+//            initRecyclerPath()
+//            updatePath()
+//        })
 
 
     }
-    private fun initRecyclerPath(){
-        pathAdapter = LikedAdapter(this)
-        bottomSheetBinding.recyclerForBottomSheetPath.layoutManager = LinearLayoutManager(context)
-        bottomSheetBinding.recyclerForBottomSheetPath.adapter = pathAdapter
-    }
-    private fun updatePath(){
-        model.liveDataPath.observe(viewLifecycleOwner){
-            pathAdapter.submitList(it)
-        }
-    }
+//    private fun initRecyclerPath(){
+//        pathAdapter = LikedAdapter(this)
+//        bottomSheetBinding.recyclerForBottomSheetPath.layoutManager = LinearLayoutManager(context)
+//        bottomSheetBinding.recyclerForBottomSheetPath.adapter = pathAdapter
+//    }
+//    private fun updatePath(){
+//        model.liveDataPath.observe(viewLifecycleOwner){
+//            pathAdapter.submitList(it)
+//        }
+//    }
 
     override fun onStart() {
         fragmentStateTripBinding.mapview.onStart()
@@ -194,9 +194,9 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         TODO("Not yet implemented")
     }
 
-    override fun dbOnClick(item: TableForDB) {
-        val bundle = Bundle()
-        bundle.putString("1",item.identification)
-        findNavController(bottomSheetBinding.root).navigate(R.id.action_stateTripFragment_to_placeCardInLKFragment,bundle)
-    }
+//    override fun dbOnClick(item: TableForDB) {
+//        val bundle = Bundle()
+//        bundle.putString("1",item.identification)
+//        findNavController(bottomSheetBinding.root).navigate(R.id.action_stateTripFragment_to_placeCardInLKFragment,bundle)
+//    }
 }
