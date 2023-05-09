@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:background="@color/text_back">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/text_back"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_for_bottom_sheet_path"

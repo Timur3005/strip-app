@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.add
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -98,7 +100,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         bottomSheetBinding.recyclerForBottomSheetPath.adapter = pathAdapter
     }
     private fun updatePath(){
-        model.liveDataLiked.observe(viewLifecycleOwner){
+        model.liveDataPath.observe(viewLifecycleOwner){
             pathAdapter.submitList(it)
         }
     }
@@ -195,6 +197,6 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
     override fun dbOnClick(item: TableForDB) {
         val bundle = Bundle()
         bundle.putString("1",item.identification)
-        findNavController(bottomSheetBinding.root).navigate(R.id.action_stateTripFragment_to_placeCardInLKFragment, bundle)
+        findNavController(bottomSheetBinding.root).navigate(R.id.action_stateTripFragment_to_placeCardInLKFragment,bundle)
     }
 }

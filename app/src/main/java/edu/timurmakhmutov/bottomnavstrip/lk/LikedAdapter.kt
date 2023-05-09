@@ -11,7 +11,7 @@ import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.LikedItemBinding
 
-internal class LikedAdapter(val listener:DBListener): ListAdapter<TableForDB,LikedAdapter.LikedViewHolder>(Comparator()) {
+internal class LikedAdapter(private val listener:DBListener): ListAdapter<TableForDB,LikedAdapter.LikedViewHolder>(Comparator()) {
     class LikedViewHolder(view:View): RecyclerView.ViewHolder(view){
         val binding = LikedItemBinding.bind(view)
         fun bind(item: TableForDB, listener: DBListener){
