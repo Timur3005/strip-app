@@ -41,7 +41,6 @@ import kotlinx.android.synthetic.main.fragment_state_trip.*
 
 class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserLocationObjectListener{
     private lateinit var fragmentStateTripBinding: FragmentStateTripBinding
-    private lateinit var bottomSheetBinding: BottomSheetForPathInStateTripFragmentBinding
     private lateinit var start:Point
 
     private val tableForDBRepository = TableForDBRepository(Application())
@@ -51,10 +50,6 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
     private lateinit var drivingRouter:DrivingRouter
     private lateinit var drivingSession: DrivingSession
 
-    private lateinit var bottomSheetDialog:BottomSheetDialog
-    private lateinit var bottomSheetView: View
-    private lateinit var pathAdapter: LikedAdapter
-    private val model: LKViewModel by activityViewModels()
 
     @SuppressLint("InflateParams")
     override fun onCreateView(
@@ -62,17 +57,10 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         savedInstanceState: Bundle?
     ): View {
 
-
-        // Inflate the layout for this fragment
         fragmentStateTripBinding = FragmentStateTripBinding.inflate(inflater, container, false)
-//        bottomSheetDialog = BottomSheetDialog(requireContext())
-//        bottomSheetView= layoutInflater.inflate(R.layout.bottom_sheet_for_path_in_state_trip_fragment, null)
-
         fragmentStateTripBinding.mapview
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
         mapObjects = fragmentStateTripBinding.mapview.map.mapObjects
-//        bottomSheetBinding = BottomSheetForPathInStateTripFragmentBinding.bind(bottomSheetView)
-//        bottomSheetDialog.setContentView(bottomSheetView)
         fragmentStateTripBinding.activateSheet.setOnClickListener {
             findNavController().navigate(R.id.action_stateTripFragment_to_bottomSheetFragment)
         }
@@ -86,24 +74,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
 
         setLocation()
         racoord()
-//        tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer {
-//            model.liveDataPath.value = it
-//            initRecyclerPath()
-//            updatePath()
-//        })
-
-
     }
-//    private fun initRecyclerPath(){
-//        pathAdapter = LikedAdapter(this)
-//        bottomSheetBinding.recyclerForBottomSheetPath.layoutManager = LinearLayoutManager(context)
-//        bottomSheetBinding.recyclerForBottomSheetPath.adapter = pathAdapter
-//    }
-//    private fun updatePath(){
-//        model.liveDataPath.observe(viewLifecycleOwner){
-//            pathAdapter.submitList(it)
-//        }
-//    }
 
     override fun onStart() {
         fragmentStateTripBinding.mapview.onStart()
@@ -193,10 +164,4 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
     override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {
         TODO("Not yet implemented")
     }
-
-//    override fun dbOnClick(item: TableForDB) {
-//        val bundle = Bundle()
-//        bundle.putString("1",item.identification)
-//        findNavController(bottomSheetBinding.root).navigate(R.id.action_stateTripFragment_to_placeCardInLKFragment,bundle)
-//    }
 }
