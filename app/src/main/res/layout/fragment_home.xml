@@ -75,10 +75,29 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_for_top_trips_home"
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="Достопримечательности"
+                    android:id="@+id/attractions"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="Развлекательный"
+                    android:id="@+id/entertainments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"/>
+                <TextView
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:text="Искусство"
+                    android:id="@+id/museums"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:paddingTop="10dp"/>
         </LinearLayout>
 

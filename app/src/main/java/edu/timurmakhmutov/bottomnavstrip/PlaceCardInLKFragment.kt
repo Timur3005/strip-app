@@ -12,9 +12,10 @@ import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceCardInLKBindin
 import edu.timurmakhmutov.bottomnavstrip.place_screen.ImagePagerAdapter
 
 class PlaceCardInLKFragment : Fragment() {
+
     private lateinit var binding: FragmentPlaceCardInLKBinding
     private val tableForDBRepository = TableForDBRepository(Application())
-    private var clickCounter = 0;
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/title"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:text="Название"
@@ -20,13 +21,15 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             android:layout_marginTop="20dp"/>
-        <ImageView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_tour"
             android:layout_width="350dp"
             android:layout_height="350dp"
             android:background="@drawable/shape_text"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"/>
         <TextView
+            android:id="@+id/description"
             android:layout_width="350dp"
             android:layout_height="200dp"
             android:text="Описание"

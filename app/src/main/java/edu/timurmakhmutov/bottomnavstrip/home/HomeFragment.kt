@@ -1,6 +1,7 @@
 package edu.timurmakhmutov.bottomnavstrip.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.location.FusedLocationProviderClient
 import edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceScreenFragment
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentHomeBinding
@@ -25,16 +28,21 @@ import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
 
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    private lateinit var lat: String
+    private lateinit var lon: String
+
     private val cityTypelist:List<String> = listOf("","msk","spb","nsk",
         "ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
-    private val chillTypelist:List<String> = listOf("", "cinema","comedy-club,concert-hall","amusement,bar,brewery,comedy-club,culture","prirodnyj-zapovednik,park,stable","museums","photo-places"
+    private val chillTypelist:List<String> = listOf("", "cinema","comedy-club,concert-hall","amusement,cinema,bar,brewery,comedy-club,culture","prirodnyj-zapovednik,park,stable","museums","photo-places"
         ,"bridge,church,fountain,palace,homesteads","attractions,culture",
     "questroom","park,recreation,suburb,dance-studio",
         "art-centers,art-space,museums,workshops,theatre","other")
 
     private lateinit var pLauncher: ActivityResultLauncher<String>
     private lateinit var  homePlacesAdapter: HomePlacesAdapter
-    private var binding: FragmentHomeBinding? = null
+    private lateinit var binding: FragmentHomeBinding
     private val model: HomeViewModel by activityViewModels()
 
     private var city:String =""
@@ -42,11 +50,16 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
 
 
 
+    @SuppressLint("MissingPermission")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
+        fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+            lat = it.latitude.toString()
+            lon = it.longitude.toString()
+        }
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -80,10 +93,33 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPermission()
-
         initTopRecycler()
 
-        //spinners init
+        binding.museums.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("1", "art-centers,art-space,museums,workshops,theatre")
+            bundle.putString("2","Искусство")
+            bundle.putString("3",lat)
+            bundle.putString("4", lon)
+            findNavController().navigate(R.id.action_homeFragment_to_freeTripScreenFragment, bundle)
+        }
+        binding.entertainments.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("1", "amusement,cinema,bar,brewery,comedy-club,culture")
+            bundle.putString("2","Развлектальный")
+            bundle.putString("3",lat)
+            bundle.putString("4", lon)
+            findNavController().navigate(R.id.action_homeFragment_to_freeTripScreenFragment, bundle)
+        }
+        binding.attractions.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("1", "attractions,culture")
+            bundle.putString("2","Достопримечательности")
+            bundle.putString("3",lat)
+            bundle.putString("4", lon)
+            findNavController().navigate(R.id.action_homeFragment_to_freeTripScreenFragment, bundle)
+        }
+
         binding?.citySpinnerMain?.onItemSelectedListener =object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -172,7 +208,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
     override fun onClick(item: HomePlaceNames) {
         val bundle = Bundle()
         bundle.putString("1",item.placeId)
-        findNavController(binding!!.root).navigate(R.id.action_homeFragment_to_placeScreenFragment, bundle)
+        findNavController(binding.root).navigate(R.id.action_homeFragment_to_placeScreenFragment, bundle)
     }
-
 }
