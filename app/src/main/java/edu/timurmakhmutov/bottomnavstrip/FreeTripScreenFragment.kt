@@ -38,26 +38,12 @@ class FreeTripScreenFragment : Fragment(), LikedAdapter.DBListener {
         // Inflate the layout for this fragment
         fragmentFreeTripScreenBinding =
             FragmentFreeTripScreenBinding.inflate(inflater, container, false)
-        fragmentFreeTripScreenBinding.title.text = arguments?.getString("2")
-        if (arguments?.getString("2")=="Искусство"){
-            fragmentFreeTripScreenBinding.description.text
-        }
-        if (arguments?.getString("2")=="Развлектальный"){
-            fragmentFreeTripScreenBinding.description.text
-        }
-        if (arguments?.getString("2")=="Достопримечательности"){
-            fragmentFreeTripScreenBinding.description.text
-        }
-        lat = arguments?.getString("3").toString()
-        lon = arguments?.getString("4").toString()
-        types = arguments?.getString("1").toString()
         return fragmentFreeTripScreenBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-        workWithApi(types, lat, lon)
     }
 
     private fun workWithApi(types: String, lat: String, lon: String){
@@ -98,7 +84,6 @@ class FreeTripScreenFragment : Fragment(), LikedAdapter.DBListener {
         val names = namesMainObject.getJSONArray("results")
         for (i in 0 until names.length()) {
             val name = names[i] as JSONObject
-            tour.add(TableForDB())
         }
         return tour
     }

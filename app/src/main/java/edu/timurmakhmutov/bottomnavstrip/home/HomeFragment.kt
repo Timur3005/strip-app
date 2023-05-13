@@ -26,10 +26,10 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
+class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursListener {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
+    private lateinit var toursAdapter: ToursAdapter
     private lateinit var lat: String
     private lateinit var lon: String
 
@@ -50,16 +50,11 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
 
 
 
-    @SuppressLint("MissingPermission")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-            lat = it.latitude.toString()
-            lon = it.longitude.toString()
-        }
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -95,36 +90,12 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
         checkPermission()
         initTopRecycler()
 
-        binding.museums.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("1", "art-centers,art-space,museums,workshops,theatre")
-            bundle.putString("2","Искусство")
-            bundle.putString("3",lat)
-            bundle.putString("4", lon)
-            findNavController().navigate(R.id.action_homeFragment_to_freeTripScreenFragment, bundle)
-        }
-        binding.entertainments.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("1", "amusement,cinema,bar,brewery,comedy-club,culture")
-            bundle.putString("2","Развлектальный")
-            bundle.putString("3",lat)
-            bundle.putString("4", lon)
-            findNavController().navigate(R.id.action_homeFragment_to_freeTripScreenFragment, bundle)
-        }
-        binding.attractions.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("1", "attractions,culture")
-            bundle.putString("2","Достопримечательности")
-            bundle.putString("3",lat)
-            bundle.putString("4", lon)
-            findNavController().navigate(R.id.action_homeFragment_to_freeTripScreenFragment, bundle)
-        }
-
         binding?.citySpinnerMain?.onItemSelectedListener =object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 city = cityTypelist[p2]
                 homeSpinnerChoice(city,categories)
+                buildTourRequest(city)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -151,6 +122,9 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
         model.liveDataHome.observe(viewLifecycleOwner){ places ->
             homePlacesAdapter.submitList(places)
         }
+        model.liveDataToursNames.observe(viewLifecycleOwner){
+            toursAdapter.submitList(it)
+        }
     }
 
     //проверка разрешений
@@ -172,6 +146,10 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
         binding?.recyclerForTopPlacesHome?.layoutManager = LinearLayoutManager(context)
         homePlacesAdapter = HomePlacesAdapter(this)
         binding?.recyclerForTopPlacesHome?.adapter = homePlacesAdapter
+
+        binding.toursRecycler.layoutManager = LinearLayoutManager(context)
+        toursAdapter = ToursAdapter(this)
+        binding.toursRecycler.adapter = toursAdapter
     }
 
     private fun homeSpinnerChoice(location: String, categories: String) {
@@ -209,5 +187,36 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener {
         val bundle = Bundle()
         bundle.putString("1",item.placeId)
         findNavController(binding.root).navigate(R.id.action_homeFragment_to_placeScreenFragment, bundle)
+    }
+
+    private fun buildTourRequest(city: String){
+        val url = "https://kudago.com/public-api/v1.4/lists/?lang=" +
+                "&fields=&expand=&order_by=&text_format=&ids=" +
+                "&location="+city
+        val queue = Volley.newRequestQueue(context)
+        val request = StringRequest(
+            Request.Method.GET,
+            url,
+            { result -> model.liveDataToursNames.value = parseTours(result)},
+            { error -> error.printStackTrace() }
+        )
+        queue.add(request)
+    }
+
+    private fun parseTours(result: String):ArrayList<ToursNames>{
+        val list = kotlin.collections.ArrayList<ToursNames>()
+        val namesMainObject = JSONObject(result)
+        val names = namesMainObject.getJSONArray("results")
+        for (i in 0 until names.length()) {
+            val name = names[i] as JSONObject
+            list.add(ToursNames(name.getString("title"),name.getString("id")))
+        }
+        return list
+    }
+
+    override fun onClick(item: ToursNames) {
+        val bundle = Bundle()
+        bundle.putString("1", item.id)
+        findNavController().navigate(R.id.action_homeFragment_to_freeTripScreenFragment, bundle)
     }
 }

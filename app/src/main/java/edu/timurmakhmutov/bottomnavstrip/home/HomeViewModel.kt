@@ -11,4 +11,7 @@ class HomeViewModel : ViewModel() {
     val liveDataHome: MutableLiveData<List<HomePlaceNames>> by lazy {
         MutableLiveData<List<HomePlaceNames>>()
     }
+    val liveDataToursNames: MutableLiveData<List<ToursNames>> by lazy {
+        MutableLiveData<List<ToursNames>>()
+    }
 }
