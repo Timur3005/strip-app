@@ -1,9 +1,13 @@
 package edu.timurmakhmutov.bottomnavstrip;
 
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -26,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
-        BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.homeFragment, R.id.LKFragment, R.id.stateTripFragment, R.id.paymentTripFragment)
                 .build();
@@ -36,5 +39,17 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         tableForDBRepository = new TableForDBRepository(getApplication());
+
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                if(navDestination.getId() == R.id.homeFragment || navDestination.getId() == R.id.LKFragment || navDestination.getId() == R.id.stateTripFragment ||
+                        navDestination.getId() == R.id.paymentTripFragment || navDestination.getId() == R.id.bottomSheetFragment) {
+                    activityMainBinding.bottomNavigationView.setVisibility(View.VISIBLE);
+                } else {
+                    activityMainBinding.bottomNavigationView.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 }

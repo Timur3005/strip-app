@@ -25,7 +25,6 @@ class LKFragment : Fragment(),LikedAdapter.DBListener {
         savedInstanceState: Bundle?
     ): View {
         lkBinding = FragmentLKBinding.inflate(inflater, container, false)
-        lkBinding.startInLk.setOnClickListener { findNavController(lkBinding.root).navigate(R.id.action_LKFragment_to_stateTripFragment) }
         return lkBinding.root
     }
 

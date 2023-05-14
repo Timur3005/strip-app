@@ -1,6 +1,8 @@
 package edu.timurmakhmutov.bottomnavstrip
 
 import android.app.Application
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
@@ -66,10 +68,16 @@ class FreeTripScreenFragment : BottomSheetDialogFragment() {
     private fun parseTour(result: String){
         val namesMainObject = JSONObject(result)
         val description: String? = namesMainObject.getString("description")
-        if (description!=null) {
+        val url: String? = namesMainObject.getString("site_url")
+        if (description!=null && url!=null) {
             fragmentFreeTripScreenBinding.description.text =
                 description.replace("<p>", "").replace("</p>", "")
-        } else {
+            fragmentFreeTripScreenBinding.startInFreeTripScreen.setOnClickListener{
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(intent)
+            }
+        }
+        else {
             fragmentFreeTripScreenBinding.startInFreeTripScreen.isVisible = false
             fragmentFreeTripScreenBinding.description.text = "Ошибка сервиса"
         }

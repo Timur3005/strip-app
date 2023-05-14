@@ -28,10 +28,7 @@ import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursListener {
 
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var toursAdapter: ToursAdapter
-    private lateinit var lat: String
-    private lateinit var lon: String
 
     private val cityTypelist:List<String> = listOf("","msk","spb","nsk",
         "ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
@@ -57,8 +54,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
 
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        binding!!.homeStartButton.setOnClickListener { findNavController(binding!!.root).navigate(R.id.action_homeFragment_to_stateTripFragment) }
 
 
         //Спиннер городов
