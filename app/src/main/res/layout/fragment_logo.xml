@@ -4,5 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LogoFragment"
-    android:background="@drawable/start">
+    android:background="@drawable/start"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:layout_marginTop="580dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
 </LinearLayout>
