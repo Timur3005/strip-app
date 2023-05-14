@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.whenResumed
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentFreeTripScreenBinding
@@ -22,14 +25,11 @@ import edu.timurmakhmutov.bottomnavstrip.lk.LKViewModel
 import edu.timurmakhmutov.bottomnavstrip.lk.LikedAdapter
 import org.json.JSONObject
 
-class FreeTripScreenFragment : Fragment(), LikedAdapter.DBListener {
+class FreeTripScreenFragment : BottomSheetDialogFragment() {
 
     private lateinit var fragmentFreeTripScreenBinding: FragmentFreeTripScreenBinding
-    private lateinit var types: String
-    private lateinit var lat: String
-    private lateinit var lon: String
-    private val tableForDBRepository = TableForDBRepository(Application())
-    private lateinit var tourAdapter: LikedAdapter
+    private var id: String? = null
+    private var tourLink: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,62 +38,40 @@ class FreeTripScreenFragment : Fragment(), LikedAdapter.DBListener {
         // Inflate the layout for this fragment
         fragmentFreeTripScreenBinding =
             FragmentFreeTripScreenBinding.inflate(inflater, container, false)
+
+        id = arguments?.getString("1")
         return fragmentFreeTripScreenBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
+        id?.let { workWithApi(it) }
     }
 
-    private fun workWithApi(types: String, lat: String, lon: String){
-        val url ="https://kudago.com/public-api/v1.4/places/?lang=" +
-                "&fields=&page_size=100&expand=&order_by=&text_format=text&ids=&location="+
-                "&has_showings=&showing_since=1444385206&showing_until=1444385206" +
-                "&is_free=" +
-                "&categories=" + types +
-                "&lon=" + lat +
-                "&lat=" + lon +
-                "&radius=20000"
+    private fun workWithApi(id: String){
+        val url ="https://kudago.com/public-api/v1.4/lists/" + id +
+                "/?lang=&fields=&expand="
         val queue = Volley.newRequestQueue(context)
         val request = StringRequest(
             Request.Method.GET,
             url,
             { result ->
-                val places =  parseTour(result)
-                tourAdapter.submitList(places)
-                fragmentFreeTripScreenBinding.startInFreeTripScreen.setOnClickListener{
-                    for (i in places){
-                        i.inPath = 1
-                        tableForDBRepository.getById(i.identification).observe(viewLifecycleOwner, Observer {
-                            if (it==null){
-                                tableForDBRepository.insert(i)
-                            }
-                        })
-                    }
-                }
+                parseTour(result)
             },
             { error -> error.printStackTrace() }
         )
         queue.add(request)
     }
 
-    private fun parseTour(result: String):ArrayList<TableForDB>{
-        val tour = ArrayList<TableForDB>()
+    private fun parseTour(result: String){
         val namesMainObject = JSONObject(result)
-        val names = namesMainObject.getJSONArray("results")
-        for (i in 0 until names.length()) {
-            val name = names[i] as JSONObject
+        val description: String? = namesMainObject.getString("description")
+        if (description!=null) {
+            fragmentFreeTripScreenBinding.description.text =
+                description.replace("<p>", "").replace("</p>", "")
+        } else {
+            fragmentFreeTripScreenBinding.startInFreeTripScreen.isVisible = false
+            fragmentFreeTripScreenBinding.description.text = "Ошибка сервиса"
         }
-        return tour
-    }
-    private fun initRecycler(){
-        fragmentFreeTripScreenBinding.recyclerTour.layoutManager = LinearLayoutManager(context)
-        tourAdapter = LikedAdapter(this)
-        fragmentFreeTripScreenBinding.recyclerTour.adapter = tourAdapter
-    }
-
-    override fun dbOnClick(item: TableForDB) {
-        TODO("Not yet implemented")
     }
 }

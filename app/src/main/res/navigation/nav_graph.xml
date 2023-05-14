@@ -73,15 +73,11 @@
         android:name="edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceScreenFragment"
         android:label="fragment_place_screen"
         tools:layout="@layout/fragment_place_screen" />
-    <fragment
+    <dialog
         android:id="@+id/freeTripScreenFragment"
         android:name="edu.timurmakhmutov.bottomnavstrip.FreeTripScreenFragment"
         android:label="fragment_free_trip_screen"
-        tools:layout="@layout/fragment_free_trip_screen" >
-        <action
-            android:id="@+id/action_freeTripScreenFragment_to_stateTripFragment"
-            app:destination="@id/stateTripFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_free_trip_screen" />
     <fragment
         android:id="@+id/payFragment"
         android:name="edu.timurmakhmutov.bottomnavstrip.PayFragment"

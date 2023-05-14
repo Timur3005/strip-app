@@ -1,54 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".FreeTripScreenFragment"
     android:orientation="vertical"
-    android:background="@drawable/type1">
+    android:background="@color/text_back">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:text="Название"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/shape_text"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_tour"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:background="@drawable/shape_text"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"/>
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="350dp"
-            android:layout_height="200dp"
-            android:text="Описание"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/shape_text"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
-        <Button
-            android:id="@+id/start_in_free_trip_screen"
-            android:layout_width="180dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/shape_for_button"
-            android:text="Старт"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/shape_text"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"/>
+    <Button
+        android:textStyle="bold"
+        android:id="@+id/start_in_free_trip_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_for_button"
+        android:text="Перейти на веб-страницу"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:layout_marginBottom="10dp"/>
 
 
-</ScrollView>
+</LinearLayout>
