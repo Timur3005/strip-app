@@ -16,6 +16,8 @@
         android:textSize="32dp"
         android:textColor="@color/black"/>
     <EditText
+        android:inputType="textEmailAddress"
+        android:id="@+id/email"
         android:layout_width="300dp"
         android:layout_gravity="center_horizontal"
         android:layout_height="40dp"
@@ -23,6 +25,8 @@
         android:hint="Логин"
         android:background="@color/white"/>
     <EditText
+        android:inputType="textPassword"
+        android:id="@+id/password"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -30,6 +34,8 @@
         android:hint="Пароль"
         android:background="@color/white"/>
     <Button
+        android:textColor="@color/black"
+        android:textAllCaps="false"
         android:id="@+id/button_reg"
         android:layout_width="300dp"
         android:layout_marginTop="10dp"

@@ -17,5 +17,5 @@ class HomeViewModel : ViewModel() {
 
     val placesLoaded = MutableLiveData<Boolean>()
     val toursLoaded = MutableLiveData<Boolean>()
-
+    val uId = MutableLiveData<String>()
 }
