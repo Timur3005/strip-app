@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "49510305075",
+    "firebase_url": "https://stripbottomnavigation-default-rtdb.firebaseio.com",
+    "project_id": "stripbottomnavigation",
+    "storage_bucket": "stripbottomnavigation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49510305075:android:c70f64cd1ced138384c246",
+        "android_client_info": {
+          "package_name": "edu.timurmakhmutov.bottomnavstrip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49510305075-kiruviasd9i5r64ivd0k3djn93ln7pbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB06vU-MsA9EYt1RqcQ326f7DlglFO57U8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49510305075-kiruviasd9i5r64ivd0k3djn93ln7pbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
