@@ -66,11 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
         tableForDBRepository.getAllTables().observe(this, new Observer<List<TableForDB>>() {
             @Override
             public void onChanged(List<TableForDB> tableForDBS) {
@@ -95,5 +90,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 }

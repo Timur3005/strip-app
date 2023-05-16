@@ -19,6 +19,7 @@ import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
 import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_free_trip_screen.*
 import org.json.JSONObject
 
 class PlaceScreenFragment : Fragment(){
@@ -49,6 +50,7 @@ class PlaceScreenFragment : Fragment(){
         }
         initComments()
         updateData()
+
         tableForDBRepository.getById(trueId).observe(viewLifecycleOwner, Observer {item->
             if (item == null) {
                 var liked = 0
@@ -91,7 +93,7 @@ class PlaceScreenFragment : Fragment(){
                 }
             }
             else{
-                if (item.inLiked == 0){
+                if (item.inLiked == 0 && item.inPath == 1){
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
                     fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
@@ -99,11 +101,11 @@ class PlaceScreenFragment : Fragment(){
                         fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
                     }
                     fragmentPlaceScreenBinding.addToPath.setOnClickListener {
-                        tableForDBRepository.delete(item)
+                        tableForDBRepository.updatePath(trueId,0)
                         fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
                     }
                 }
-                else if(item.inPath == 0){
+                else if(item.inPath == 0 && item.inLiked == 1){
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
                     fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
                     fragmentPlaceScreenBinding.addToPath.setOnClickListener {
@@ -111,11 +113,11 @@ class PlaceScreenFragment : Fragment(){
                         fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
                     }
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
-                        tableForDBRepository.delete(item)
+                        tableForDBRepository.updateLiked(trueId, 0)
                         fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
                     }
                 }
-                else{
+                else if (item.inPath == 1 && item.inLiked == 1){
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
                     fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
                     fragmentPlaceScreenBinding.addToPath.setOnClickListener {
@@ -127,8 +129,27 @@ class PlaceScreenFragment : Fragment(){
                         fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
                     }
                 }
+                else{
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
+                    fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                    fragmentPlaceScreenBinding.addToPath.setOnClickListener {
+                        tableForDBRepository.updatePath(trueId, 1)
+                        fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                    }
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
+                        tableForDBRepository.updateLiked(trueId, 1)
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
+                    }
+                }
             }
         })
+//        tableForDBRepository.allTables.observe(viewLifecycleOwner, Observer {
+//            for (i in it){
+//                if (i.inPath == 0 && i.inLiked == 0){
+//                    tableForDBRepository.delete(i)
+//                }
+//            }
+//        })
     }
     private fun updateData(){
         model.liveDataCommentsFields.observe(viewLifecycleOwner){
