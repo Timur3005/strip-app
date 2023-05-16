@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -13,17 +14,27 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.yandex.mapkit.MapKitFactory;
 
+import java.util.List;
 import java.util.Objects;
 
+import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB;
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository;
 import edu.timurmakhmutov.bottomnavstrip.databinding.ActivityMainBinding;
+import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding activityMainBinding;
     private TableForDBRepository tableForDBRepository;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference reference;
+    private FirebaseAuth mAuth;
+    private HomeViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(activityMainBinding.bottomNavigationView, navController);
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        reference = firebaseDatabase.getReference();
+
         tableForDBRepository = new TableForDBRepository(getApplication());
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -48,6 +63,35 @@ public class MainActivity extends AppCompatActivity {
                     activityMainBinding.bottomNavigationView.setVisibility(View.VISIBLE);
                 } else {
                     activityMainBinding.bottomNavigationView.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        tableForDBRepository.getAllTables().observe(this, new Observer<List<TableForDB>>() {
+            @Override
+            public void onChanged(List<TableForDB> tableForDBS) {
+                if (tableForDBS!=null) {
+                    for (int i = 0; i < tableForDBS.size(); i++) {
+                        if (tableForDBS.get(i).inPath==1 || tableForDBS.get(i).inLiked==1) {
+//                            reference.child("Users").child(mAuth.getUid()).child("Liked").child("placeId").setValue(tableForDBS.get(i).identification);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("address").setValue(tableForDBS.get(i).address);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("inLiked").setValue(tableForDBS.get(i).inLiked);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("inPath").setValue(tableForDBS.get(i).inPath);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("description").setValue(tableForDBS.get(i).description);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("location").setValue(tableForDBS.get(i).location);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("lat").setValue(tableForDBS.get(i).lat);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("lon").setValue(tableForDBS.get(i).lon);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("imageURLs").setValue(tableForDBS.get(i).imageURLs);
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).child("title").setValue(tableForDBS.get(i).title);
+                        }
+                        else{
+                            reference.child("Users").child(mAuth.getUid()).child("Liked").child(tableForDBS.get(i).identification).removeValue();
+                        }
+                    }
                 }
             }
         });
