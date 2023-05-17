@@ -43,7 +43,6 @@ class PlaceScreenFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val trueId: String? = arguments?.getString("1")
-        println(trueId)
         if (trueId != null) {
             parsePlace(trueId)
             parseComments(trueId)

@@ -55,7 +55,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
+        model.wasEnter.value = "true"
         //Спиннер городов
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
