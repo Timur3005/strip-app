@@ -52,4 +52,8 @@ class BottomSheetFragment : BottomSheetDialogFragment(), LikedAdapter.DBListener
 
     }
 
+    override fun longClick(item: TableForDB, view: View) {
+        TODO("Not yet implemented")
+    }
+
 }

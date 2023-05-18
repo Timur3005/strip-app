@@ -18,6 +18,11 @@ internal class LikedAdapter(private val listener:DBListener): ListAdapter<TableF
             binding.likedTv.text = item.title
             binding.likedTv.setOnClickListener{
                 listener.dbOnClick(item)
+
+            }
+            binding.likedTv.setOnLongClickListener {
+                listener.longClick(item, it)
+                true
             }
         }
     }
@@ -44,6 +49,7 @@ internal class LikedAdapter(private val listener:DBListener): ListAdapter<TableF
 
     interface DBListener{
         fun dbOnClick(item: TableForDB)
+        fun longClick(item: TableForDB, view:View)
     }
 
 }

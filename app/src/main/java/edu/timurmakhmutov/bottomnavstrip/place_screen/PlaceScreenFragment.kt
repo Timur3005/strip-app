@@ -36,7 +36,7 @@ class PlaceScreenFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View {
         fragmentPlaceScreenBinding = FragmentPlaceScreenBinding.inflate(inflater, container, false)
-        return fragmentPlaceScreenBinding!!.root
+        return fragmentPlaceScreenBinding.root
     }
 
     @SuppressLint("ResourceAsColor")
