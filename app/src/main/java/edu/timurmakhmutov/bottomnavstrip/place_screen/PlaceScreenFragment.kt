@@ -20,6 +20,7 @@ import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
 import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_free_trip_screen.*
+import kotlinx.android.synthetic.main.fragment_one_payment_trip.*
 import org.json.JSONObject
 
 class PlaceScreenFragment : Fragment(){
@@ -70,7 +71,7 @@ class PlaceScreenFragment : Fragment(){
                                 path
                             )
                     )
-                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_24)
                 }
                 fragmentPlaceScreenBinding.addToPath.setOnClickListener {
                     path = 1
@@ -88,67 +89,60 @@ class PlaceScreenFragment : Fragment(){
                             path
                         )
                     )
-                    fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                    fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_location_off_24)
                 }
             }
             else{
                 if (item.inLiked == 0 && item.inPath == 1){
-                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
-                    fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_border_24)
+                    fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_location_off_24)
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
                         tableForDBRepository.updateLiked(trueId, 1)
-                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_24)
                     }
                     fragmentPlaceScreenBinding.addToPath.setOnClickListener {
                         tableForDBRepository.updatePath(trueId,0)
-                        fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                        fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_add_location_alt_24)
                     }
                 }
                 else if(item.inPath == 0 && item.inLiked == 1){
-                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
-                    fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_24)
+                    fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_add_location_alt_24)
                     fragmentPlaceScreenBinding.addToPath.setOnClickListener {
                         tableForDBRepository.updatePath(trueId, 1)
-                        fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                        fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_location_off_24)
                     }
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
                         tableForDBRepository.updateLiked(trueId, 0)
-                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_border_24)
                     }
                 }
                 else if (item.inPath == 1 && item.inLiked == 1){
-                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
-                    fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_24)
+                    fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_location_off_24)
                     fragmentPlaceScreenBinding.addToPath.setOnClickListener {
                         tableForDBRepository.updatePath(trueId, 0)
-                        fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                        fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_add_location_alt_24)
                     }
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
                         tableForDBRepository.updateLiked(trueId, 0)
-                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_border_24)
                     }
                 }
                 else{
-                    fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Добавить в избранное"
-                    fragmentPlaceScreenBinding.addToPath.text = "Добавить в маршрут"
+                    fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_border_24)
+                    fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_add_location_alt_24)
                     fragmentPlaceScreenBinding.addToPath.setOnClickListener {
                         tableForDBRepository.updatePath(trueId, 1)
-                        fragmentPlaceScreenBinding.addToPath.text = "Удалить из маршрута"
+                        fragmentPlaceScreenBinding.addToPath.setBackgroundResource(R.drawable.ic_baseline_location_off_24)
                     }
                     fragmentPlaceScreenBinding.addToLikePlaceScreen.setOnClickListener {
                         tableForDBRepository.updateLiked(trueId, 1)
-                        fragmentPlaceScreenBinding.addToLikePlaceScreen.text = "Удалить из избранного"
+                        fragmentPlaceScreenBinding.addToLikePlaceScreen.setBackgroundResource(R.drawable.ic_baseline_star_24)
                     }
                 }
             }
         })
-//        tableForDBRepository.allTables.observe(viewLifecycleOwner, Observer {
-//            for (i in it){
-//                if (i.inPath == 0 && i.inLiked == 0){
-//                    tableForDBRepository.delete(i)
-//                }
-//            }
-//        })
     }
     private fun updateData(){
         model.liveDataCommentsFields.observe(viewLifecycleOwner){
@@ -157,9 +151,9 @@ class PlaceScreenFragment : Fragment(){
     }
 
     private fun initComments(){
-        fragmentPlaceScreenBinding?.recyclerForComments?.layoutManager = LinearLayoutManager(context)
+        fragmentPlaceScreenBinding.recyclerForComments.layoutManager = LinearLayoutManager(context)
         commentsAdapter = CommentsAdapter()
-        fragmentPlaceScreenBinding?.recyclerForComments?.adapter = commentsAdapter
+        fragmentPlaceScreenBinding.recyclerForComments.adapter = commentsAdapter
     }
 
     private fun parsePlace(identification: String){
@@ -170,7 +164,7 @@ class PlaceScreenFragment : Fragment(){
             Request.Method.GET,
             url,
             { result -> ImagesURL = setMyData(result)
-                fragmentPlaceScreenBinding?.image?.adapter = ImagePagerAdapter(ImagesURL)
+                fragmentPlaceScreenBinding.image.adapter = ImagePagerAdapter(ImagesURL)
             },
             { error -> Log.d("MyTaggg", "error $error") }
         )
@@ -181,10 +175,10 @@ class PlaceScreenFragment : Fragment(){
         val mainObj = JSONObject(result)
         val images = mainObj.getJSONArray("images")
         with(fragmentPlaceScreenBinding){
-            this?.bodyText?.text = mainObj.getString("description").replace("<p>","").replace("</p>","")
-            this?.title?.text = mainObj.getString("title")
-            this?.address?.text = mainObj.getString("address")
-            this?.location?.text = locationConvert(mainObj.getString("location"))
+            bodyText.text = mainObj.getString("description").replace("<p>","").replace("</p>","")
+            title.text = mainObj.getString("title")
+            address.text = mainObj.getString("address")
+            location.text = locationConvert(mainObj.getString("location"))
             lat = mainObj.getJSONObject("coords").getString("lat")
             lon = mainObj.getJSONObject("coords").getString("lon")
             for (i in 0 until images.length()){
