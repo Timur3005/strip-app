@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    style="@style/Animation.Design.BottomSheetDialog"
     tools:context=".BottomSheetFragment"
     android:background="@color/text_back">
 
     <androidx.recyclerview.widget.RecyclerView
+        style="@style/Animation.Design.BottomSheetDialog"
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="200dp"/>

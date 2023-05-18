@@ -58,6 +58,9 @@
         <action
             android:id="@+id/action_paymentTripFragment_to_payFragment"
             app:destination="@id/payFragment" />
+        <action
+            android:id="@+id/action_paymentTripFragment_to_placeScreenFragment"
+            app:destination="@id/placeScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/onePaymentTripFragment"

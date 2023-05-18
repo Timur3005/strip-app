@@ -15,10 +15,10 @@
     <TextView
         android:id="@+id/activate_sheet"
         android:gravity="center_horizontal"
-        android:background="@color/text_back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Маршрут"
+        android:background="@color/white"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textColor="@color/black"

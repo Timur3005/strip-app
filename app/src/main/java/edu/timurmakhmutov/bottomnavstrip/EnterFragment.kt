@@ -1,11 +1,11 @@
 package edu.timurmakhmutov.bottomnavstrip
 
 import android.app.Application
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -17,7 +17,6 @@ import com.google.firebase.database.*
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentEnterBinding
-import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import java.util.regex.Matcher
 import java.util.regex.Pattern

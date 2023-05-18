@@ -10,46 +10,53 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Платные маршруты"
+        android:text="Поиск"
         android:textColor="@color/black"
         android:textSize="32dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"/>
-    <Spinner
-        android:layout_marginTop="20dp"
-        android:id="@+id/city_spinner_payment_trips"
+    <LinearLayout
         android:layout_width="350dp"
-        android:layout_height="35dp"
-        android:background="@drawable/shape_text"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_weight="12"
+            android:id="@+id/search_place"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:hint="Введите свой запрос"
+            android:background="@drawable/shape_text"/>
+        <Button
+            android:id="@+id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Поиск"
+            android:textColor="@color/black"
+            android:textAllCaps="false"/>
+    </LinearLayout>
 
-    <Spinner
-        android:layout_marginTop="20dp"
-        android:id="@+id/type_chill_spinner_payment_trips"
-        android:layout_width="350dp"
-        android:layout_height="35dp"
-        android:background="@drawable/shape_text"
-        android:layout_gravity="center_horizontal"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_for_payment_trips_in_payment_trips"
-        android:layout_width="350dp"
-        android:layout_height="450dp"
-        android:paddingTop="10dp"
-        android:background="@drawable/shape_text"
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"/>
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_text">
 
-    <Button
-        android:id="@+id/button_for_buy_in_payment_trips"
-        android:layout_width="180dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/shape_for_button"
-        android:text="Купить"
-        android:textColor="@color/black"
-        android:textSize="18dp" />
-
-
+        <TextView
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Результат поиска"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/find_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </LinearLayout>

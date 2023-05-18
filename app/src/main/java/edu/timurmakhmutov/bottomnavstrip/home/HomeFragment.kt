@@ -50,7 +50,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -63,7 +63,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
             android.R.layout.simple_spinner_item
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding!!.citySpinnerMain.adapter = adapter
+        binding.citySpinnerMain.adapter = adapter
 
         //Спиннер категорий
         val adapterCat = ArrayAdapter.createFromResource(
@@ -72,12 +72,12 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
             android.R.layout.simple_spinner_item
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding!!.typeChillSpinnerMain.adapter = adapterCat
+        binding.typeChillSpinnerMain.adapter = adapterCat
 
 
 
 
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -85,7 +85,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
         checkPermission()
         initTopRecycler()
 
-        binding?.citySpinnerMain?.onItemSelectedListener =object :
+        binding.citySpinnerMain.onItemSelectedListener =object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 city = cityTypelist[p2]
@@ -98,7 +98,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
             }
 
         }
-        binding!!.typeChillSpinnerMain.onItemSelectedListener=object :
+        binding.typeChillSpinnerMain.onItemSelectedListener=object :
             AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 categories = chillTypelist[p2]
@@ -138,9 +138,9 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
 
     //инициализация ресайклера
     private fun initTopRecycler(){
-        binding?.recyclerForTopPlacesHome?.layoutManager = LinearLayoutManager(context)
+        binding.recyclerForTopPlacesHome.layoutManager = LinearLayoutManager(context)
         homePlacesAdapter = HomePlacesAdapter(this)
-        binding?.recyclerForTopPlacesHome?.adapter = homePlacesAdapter
+        binding.recyclerForTopPlacesHome.adapter = homePlacesAdapter
 
         binding.toursRecycler.layoutManager = LinearLayoutManager(context)
         toursAdapter = ToursAdapter(this)
