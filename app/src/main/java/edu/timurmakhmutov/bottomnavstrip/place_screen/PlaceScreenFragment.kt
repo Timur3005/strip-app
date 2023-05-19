@@ -2,11 +2,11 @@ package edu.timurmakhmutov.bottomnavstrip.place_screen
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -18,9 +18,7 @@ import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
-import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_free_trip_screen.*
-import kotlinx.android.synthetic.main.fragment_one_payment_trip.*
 import org.json.JSONObject
 
 class PlaceScreenFragment : Fragment(){

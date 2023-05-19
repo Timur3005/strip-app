@@ -53,23 +53,8 @@
         android:label="fragment_payment_trip"
         tools:layout="@layout/fragment_payment_trip" >
         <action
-            android:id="@+id/action_paymentTripFragment_to_onePaymentTripFragment"
-            app:destination="@id/onePaymentTripFragment" />
-        <action
-            android:id="@+id/action_paymentTripFragment_to_payFragment"
-            app:destination="@id/payFragment" />
-        <action
             android:id="@+id/action_paymentTripFragment_to_placeScreenFragment"
             app:destination="@id/placeScreenFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/onePaymentTripFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.OnePaymentTripFragment"
-        android:label="fragment_one_payment_trip"
-        tools:layout="@layout/fragment_one_payment_trip" >
-        <action
-            android:id="@+id/action_onePaymentTripFragment_to_payFragment"
-            app:destination="@id/payFragment" />
     </fragment>
     <fragment
         android:id="@+id/placeScreenFragment"
@@ -81,20 +66,6 @@
         android:name="edu.timurmakhmutov.bottomnavstrip.FreeTripScreenFragment"
         android:label="fragment_free_trip_screen"
         tools:layout="@layout/fragment_free_trip_screen" />
-    <fragment
-        android:id="@+id/payFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.PayFragment"
-        android:label="fragment_pay"
-        tools:layout="@layout/fragment_pay" >
-        <action
-            android:id="@+id/action_payFragment_to_afterBuyFragment"
-            app:destination="@id/afterBuyFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/afterBuyFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.AfterBuyFragment"
-        android:label="fragment_after_buy"
-        tools:layout="@layout/fragment_after_buy" />
     <fragment
         android:id="@+id/enterFragment"
         android:name="edu.timurmakhmutov.bottomnavstrip.EnterFragment"
