@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.lk
+package edu.timurmakhmutov.bottomnavstrip.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

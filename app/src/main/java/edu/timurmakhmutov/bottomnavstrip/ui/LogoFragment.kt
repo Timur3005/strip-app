@@ -1,7 +1,6 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.Manifest
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,10 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
-import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
+import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentLogoBinding
 import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
-import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
+import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
 import edu.timurmakhmutov.bottomnavstrip.home.ToursNames
 import edu.timurmakhmutov.bottomnavstrip.home.isPermissionGranted
 import org.json.JSONObject

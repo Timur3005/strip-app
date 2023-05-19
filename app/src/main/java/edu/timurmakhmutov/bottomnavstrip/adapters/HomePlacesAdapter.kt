@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.home
+package edu.timurmakhmutov.bottomnavstrip.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.HomeTopForRecyclerBinding
+import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
 
-class HomePlacesAdapter(private val listener: Listener) : ListAdapter<HomePlaceNames, HomePlacesAdapter.HomeNamesHolder>(Comparator()) {
+class HomePlacesAdapter(private val listener: Listener) : ListAdapter<HomePlaceNames, HomePlacesAdapter.HomeNamesHolder>(
+    Comparator()) {
 
     //класс для создания метода заполнения вью информацией с сервера
     class HomeNamesHolder(view: View) : RecyclerView.ViewHolder(view){

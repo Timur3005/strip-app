@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.app.Application
 import android.os.Bundle
@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
+import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentBottomSheetBinding
-import edu.timurmakhmutov.bottomnavstrip.lk.LKViewModel
-import edu.timurmakhmutov.bottomnavstrip.lk.LikedAdapter
+import edu.timurmakhmutov.bottomnavstrip.view_model.LKViewModel
+import edu.timurmakhmutov.bottomnavstrip.adapters.LikedAdapter
 
 class BottomSheetFragment : BottomSheetDialogFragment(), LikedAdapter.DBListener {
 

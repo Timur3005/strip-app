@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.place_screen
+package edu.timurmakhmutov.bottomnavstrip.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.CommentsBinding
+import edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceCommentsFields
 
-class CommentsAdapter():androidx.recyclerview.widget.ListAdapter<PlaceCommentsFields, CommentsAdapter.PlaceViewHolder>(Comparator()) {
+class CommentsAdapter():androidx.recyclerview.widget.ListAdapter<PlaceCommentsFields, CommentsAdapter.PlaceViewHolder>(
+    Comparator()) {
 
     class PlaceViewHolder(view: View):RecyclerView.ViewHolder(view){
         private val binding = CommentsBinding.bind(view)

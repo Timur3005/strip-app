@@ -1,15 +1,12 @@
 package edu.timurmakhmutov.bottomnavstrip.home
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.PopupMenu
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -20,13 +17,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.google.android.gms.location.FusedLocationProviderClient
-import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
-import edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceScreenFragment
 import edu.timurmakhmutov.bottomnavstrip.R
+import edu.timurmakhmutov.bottomnavstrip.adapters.HomePlacesAdapter
+import edu.timurmakhmutov.bottomnavstrip.adapters.ToursAdapter
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentHomeBinding
+import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
 import org.json.JSONObject
-import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursListener {

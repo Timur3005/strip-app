@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.app.Application
 import android.os.Bundle
@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
+import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentEnterBinding
 import org.json.JSONObject
 import java.util.regex.Matcher

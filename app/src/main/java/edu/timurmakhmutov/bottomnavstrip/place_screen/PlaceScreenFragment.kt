@@ -17,7 +17,10 @@ import com.android.volley.toolbox.Volley
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.R
+import edu.timurmakhmutov.bottomnavstrip.adapters.CommentsAdapter
+import edu.timurmakhmutov.bottomnavstrip.adapters.ImagePagerAdapter
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
+import edu.timurmakhmutov.bottomnavstrip.view_model.PlaceViewModel
 import kotlinx.android.synthetic.main.fragment_free_trip_screen.*
 import org.json.JSONObject
 

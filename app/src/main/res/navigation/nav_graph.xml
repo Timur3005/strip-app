@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/stateTripFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.StateTripFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.StateTripFragment"
         android:label="fragment_state_trip"
         tools:layout="@layout/fragment_state_trip" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/paymentTripFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.PaymentTripFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.PaymentTripFragment"
         android:label="fragment_payment_trip"
         tools:layout="@layout/fragment_payment_trip" >
         <action
@@ -63,12 +63,12 @@
         tools:layout="@layout/fragment_place_screen" />
     <dialog
         android:id="@+id/freeTripScreenFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.FreeTripScreenFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.FreeTripScreenFragment"
         android:label="fragment_free_trip_screen"
         tools:layout="@layout/fragment_free_trip_screen" />
     <fragment
         android:id="@+id/enterFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.EnterFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.EnterFragment"
         android:label="fragment_enter"
         tools:layout="@layout/fragment_enter" >
         <action
@@ -80,7 +80,7 @@
     </fragment>
     <fragment
         android:id="@+id/placeCardInLKFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.PlaceCardInLKFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.PlaceCardInLKFragment"
         android:label="fragment_place_card_in_l_k"
         tools:layout="@layout/fragment_place_card_in_l_k" >
         <action
@@ -89,7 +89,7 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.BottomSheetFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.BottomSheetFragment"
         android:label="fragment_bottom_sheet"
         tools:layout="@layout/fragment_bottom_sheet" >
         <action
@@ -98,7 +98,7 @@
     </dialog>
     <fragment
         android:id="@+id/logoFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.LogoFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.LogoFragment"
         android:label="fragment_logo"
         tools:layout="@layout/fragment_logo" >
         <action
@@ -110,7 +110,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.RegistrationFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action

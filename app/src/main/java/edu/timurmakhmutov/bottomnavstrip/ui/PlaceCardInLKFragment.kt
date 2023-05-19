@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.app.Application
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceCardInLKBinding
-import edu.timurmakhmutov.bottomnavstrip.place_screen.ImagePagerAdapter
+import edu.timurmakhmutov.bottomnavstrip.adapters.ImagePagerAdapter
 
 class PlaceCardInLKFragment : Fragment() {
 

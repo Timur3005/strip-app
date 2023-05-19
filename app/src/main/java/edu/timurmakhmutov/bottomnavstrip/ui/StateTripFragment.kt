@@ -1,25 +1,17 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.graphics.PointF
-import android.graphics.drawable.Icon
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.add
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.yandex.mapkit.*
 import com.yandex.mapkit.annotations.AnnotationLanguage
 import com.yandex.mapkit.directions.DirectionsFactory
@@ -27,16 +19,12 @@ import com.yandex.mapkit.directions.driving.*
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.layers.ObjectEvent
 import com.yandex.mapkit.map.*
-import com.yandex.mapkit.map.TextStyle.Placement
 import com.yandex.mapkit.user_location.UserLocationObjectListener
 import com.yandex.mapkit.user_location.UserLocationView
 import com.yandex.runtime.image.ImageProvider
-import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
-import edu.timurmakhmutov.bottomnavstrip.databinding.BottomSheetForPathInStateTripFragmentBinding
+import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentStateTripBinding
-import edu.timurmakhmutov.bottomnavstrip.lk.LKViewModel
-import edu.timurmakhmutov.bottomnavstrip.lk.LikedAdapter
 import kotlinx.android.synthetic.main.fragment_state_trip.*
 
 class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserLocationObjectListener{
@@ -137,7 +125,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                             )
                         )
                         val placemark:PlacemarkMapObject = mapObjects.addPlacemark(Point(lat,lon))
-                        placemark.setIcon(ImageProvider.fromResource(context,R.drawable.placemark),IconStyle(
+                        placemark.setIcon(ImageProvider.fromResource(context, R.drawable.placemark),IconStyle(
                             null,RotationType.ROTATE,10F,false,true,0.08F,null))
 
                     }

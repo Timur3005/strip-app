@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,9 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import edu.timurmakhmutov.bottomnavstrip.R
+import edu.timurmakhmutov.bottomnavstrip.adapters.FindAdapter
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPaymentTripBinding
 import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
-import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
+import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
 import org.json.JSONObject
 
 class PaymentTripFragment : Fragment(), FindAdapter.FindListener {

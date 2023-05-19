@@ -1,15 +1,11 @@
 package edu.timurmakhmutov.bottomnavstrip;
 
-import static edu.timurmakhmutov.bottomnavstrip.home.ExtensionsKt.isPermissionGranted;
-
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -28,7 +24,7 @@ import java.util.Objects;
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB;
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository;
 import edu.timurmakhmutov.bottomnavstrip.databinding.ActivityMainBinding;
-import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel;
+import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

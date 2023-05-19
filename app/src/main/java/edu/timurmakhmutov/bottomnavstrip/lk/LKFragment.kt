@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.R
+import edu.timurmakhmutov.bottomnavstrip.adapters.LikedAdapter
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentLKBinding
+import edu.timurmakhmutov.bottomnavstrip.view_model.LKViewModel
 
-class LKFragment : Fragment(),LikedAdapter.DBListener {
+class LKFragment : Fragment(), LikedAdapter.DBListener {
 
     private val tableForDBRepository = TableForDBRepository(Application())
     private lateinit var lkBinding: FragmentLKBinding

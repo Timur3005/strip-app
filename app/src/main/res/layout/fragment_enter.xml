@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EnterFragment"
+    tools:context=".ui.EnterFragment"
     android:orientation="vertical"
     android:background="@drawable/enter"
     android:gravity="center">

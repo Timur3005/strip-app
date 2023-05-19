@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentRegistrationBinding
-import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
+import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 

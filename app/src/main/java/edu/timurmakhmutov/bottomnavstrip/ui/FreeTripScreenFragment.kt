@@ -1,6 +1,5 @@
-package edu.timurmakhmutov.bottomnavstrip
+package edu.timurmakhmutov.bottomnavstrip.ui
 
-import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
@@ -8,23 +7,11 @@ import android.view.ViewGroup
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.whenResumed
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
-import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDBRepository
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentFreeTripScreenBinding
-import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
-import edu.timurmakhmutov.bottomnavstrip.home.HomePlacesAdapter
-import edu.timurmakhmutov.bottomnavstrip.home.HomeViewModel
-import edu.timurmakhmutov.bottomnavstrip.lk.LKViewModel
-import edu.timurmakhmutov.bottomnavstrip.lk.LikedAdapter
 import org.json.JSONObject
 
 class FreeTripScreenFragment : BottomSheetDialogFragment() {
