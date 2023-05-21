@@ -111,7 +111,6 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
                 val drivingOptions = DrivingOptions(90.0,1,true,true,true, null,AnnotationLanguage.RUSSIAN)
                 val vehicleOptions = VehicleOptions()
                 val requestPoints:ArrayList<RequestPoint> = ArrayList()
-                val list = ArrayList<Point>()
                 requestPoints.add(RequestPoint(start,RequestPointType.WAYPOINT, null))
                 if (result.isNotEmpty()) {
                     for (item in result) {

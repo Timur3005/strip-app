@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.HomeFragment"
-    android:background="@drawable/type1"
+    android:background="@color/green1"
     android:orientation="vertical">
 
 
@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Главная"
@@ -21,7 +23,8 @@
             android:layout_gravity="center_horizontal"/>
 
         <Spinner
-            android:layout_marginTop="20dp"
+            android:elevation="2dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/city_spinner_main"
             android:layout_width="350dp"
             android:layout_height="35dp"
@@ -29,7 +32,8 @@
             android:layout_gravity="center_horizontal"/>
 
         <Spinner
-            android:layout_marginTop="20dp"
+            android:elevation="2dp"
+            android:layout_marginTop="10dp"
             android:id="@+id/type_chill_spinner_main"
             android:layout_width="350dp"
             android:layout_height="35dp"
@@ -42,6 +46,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <LinearLayout
+                android:elevation="2dp"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:layout_width="350dp"
@@ -51,7 +56,9 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:layout_marginTop="5dp"
                     android:text="Топ мест"
+                    android:textStyle="bold"
                     android:textSize="18dp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -61,11 +68,12 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_for_top_places_home"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="10dp"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"/>
             </LinearLayout>
 
             <LinearLayout
+                android:elevation="2dp"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:layout_width="350dp"
@@ -76,7 +84,9 @@
                 android:layout_marginBottom="10dp">
 
                 <TextView
+                    android:layout_marginTop="5dp"
                     android:text="Подборка"
+                    android:textStyle="bold"
                     android:textSize="18dp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
@@ -85,7 +95,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tours_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -5,9 +5,10 @@
     android:layout_height="wrap_content"
     tools:context=".ui.FreeTripScreenFragment"
     android:orientation="vertical"
-    android:background="@color/text_back">
+    android:background="@color/green1">
 
     <TextView
+        android:elevation="2dp"
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,16 +16,15 @@
         android:background="@drawable/shape_text"
         android:textSize="18dp"
         android:textColor="@color/black"
-        android:layout_marginTop="20dp"/>
+        android:layout_margin="10dp"/>
     <Button
         android:textStyle="bold"
         android:id="@+id/start_in_free_trip_screen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
         android:background="@drawable/shape_for_button"
-        android:text="Перейти на веб-страницу"
+        android:text="Перейти на сайт"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="15sp"

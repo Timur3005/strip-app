@@ -5,13 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.PlaceCardInLKFragment"
     android:orientation="vertical"
-    android:background="@drawable/type1">
+    android:background="@color/green1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:elevation="2dp"
             android:id="@+id/title"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -22,6 +23,7 @@
             android:textColor="@color/black"
             android:layout_marginTop="20dp"/>
         <TextView
+            android:elevation="2dp"
             android:id="@+id/location"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -30,15 +32,19 @@
             android:background="@drawable/shape_text"
             android:textSize="18dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"/>
         <androidx.viewpager2.widget.ViewPager2
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:elevation="2dp"
             android:id="@+id/image_in_lk_place_screen"
             android:layout_width="350dp"
             android:layout_height="200dp"
             android:background="@drawable/shape_text"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"/>
         <TextView
+            android:elevation="2dp"
             android:id="@+id/address"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -47,8 +53,9 @@
             android:background="@drawable/shape_text"
             android:textSize="18dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"/>
         <TextView
+            android:elevation="2dp"
             android:id="@+id/body_text"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -57,24 +64,25 @@
             android:background="@drawable/shape_text"
             android:textSize="18dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"/>
         <Button
+            android:elevation="2dp"
             android:id="@+id/add_to_like_place_screen"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/shape_for_button"
             android:text="Удалить из избранного"
             android:textColor="@color/black"
-            android:textSize="15sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="15sp"/>
         <Button
+            android:elevation="2dp"
             android:id="@+id/add_to_path"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/shape_for_button"
             android:text="Добавить в маршрут"
             android:textColor="@color/black"

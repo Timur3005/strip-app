@@ -29,7 +29,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
 
     private lateinit var toursAdapter: ToursAdapter
 
-
     private val cityTypelist:List<String> = listOf("","msk","spb","nsk",
         "ekb","nnv","kzn","vbg","smr","krd","sochi","ufa","krasnoyarsk")
     private val chillTypelist:List<String> = listOf("", "cinema","comedy-club,concert-hall","amusement,cinema,bar,brewery,comedy-club,culture","prirodnyj-zapovednik,park,stable","museums","photo-places"
@@ -55,21 +54,18 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        model.wasEnter.value = "true"
-        //Спиннер городов
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.cities_array,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_item
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.citySpinnerMain.adapter = adapter
 
-        //Спиннер категорий
         val adapterCat = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.categories_array,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_item
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.typeChillSpinnerMain.adapter = adapterCat

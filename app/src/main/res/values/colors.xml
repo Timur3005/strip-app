@@ -10,5 +10,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="text_back">#D0D3E7</color>
     <color name="button_back">#9F7B1F</color>
+    <color name="green1">#E7E8BC</color>
+    <color name="green2">#F9FBA9</color>
+    <color name="green3">#F5F88C</color>
+    <color name="green4">#BBBC7E</color>
+    <color name="green5">#A2A530</color>
 
 </resources>

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".home.HomeFragment"
-    android:background="@drawable/type1"
+    android:background="@color/green1"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,40 +12,46 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Личный кабинет"
-            android:textSize="32dp"
+            android:textSize="32sp"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
+            android:elevation="2dp"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/shape_text"
             android:orientation="vertical"
             android:layout_weight="10">
 
             <TextView
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Ваш маршрут"
                 android:textColor="@color/black"
-                android:textSize="18dp" />
+                android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_for_trip_in_lk"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"/>
         </LinearLayout>
 
         <LinearLayout
+            android:elevation="2dp"
             android:layout_marginTop="20dp"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -56,8 +62,10 @@
             android:layout_marginBottom="20dp">
 
             <TextView
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
                 android:text="Избранное"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,7 +75,7 @@
                 android:id="@+id/recycler_for_liked_in_lk"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="10dp"/>
         </LinearLayout>
 

@@ -5,20 +5,21 @@
     android:layout_height="match_parent"
     tools:context=".place_screen.PlaceScreenFragment"
     android:orientation="vertical"
-    android:background="@drawable/type1">
+    android:background="@color/green1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:orientation="vertical">
         <LinearLayout
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
             android:gravity="center">
             <TextView
+                android:elevation="2dp"
                 android:layout_weight="5"
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
@@ -28,8 +29,9 @@
                 android:background="@drawable/shape_text"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="15dp"/>
             <Button
+                android:elevation="2dp"
                 android:textAllCaps="false"
                 android:id="@+id/add_to_like_place_screen"
                 android:layout_width="40dp"
@@ -37,6 +39,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/ic_baseline_star_border_24"/>
             <Button
+                android:elevation="2dp"
                 android:textAllCaps="false"
                 android:id="@+id/add_to_path"
                 android:layout_width="40dp"
@@ -46,6 +49,8 @@
         </LinearLayout>
 
         <TextView
+
+            android:elevation="2dp"
             android:id="@+id/location"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -54,14 +59,23 @@
             android:background="@drawable/shape_text"
             android:textSize="18dp"
             android:textColor="@color/black"/>
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/image"
+        <LinearLayout
+            android:elevation="2dp"
             android:layout_width="350dp"
             android:layout_height="200dp"
             android:background="@drawable/shape_text"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="10dp">
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
         <TextView
+            android:elevation="2dp"
             android:id="@+id/address"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -70,8 +84,9 @@
             android:background="@drawable/shape_text"
             android:textSize="18dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="10dp"/>
         <TextView
+            android:elevation="2dp"
             android:id="@+id/body_text"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -80,14 +95,19 @@
             android:background="@drawable/shape_text"
             android:textSize="18dp"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="10dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:elevation="2dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:id="@+id/recycler_for_comments"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/shape_text"/>
+            android:background="@drawable/shape_text"
+            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 
 </ScrollView>

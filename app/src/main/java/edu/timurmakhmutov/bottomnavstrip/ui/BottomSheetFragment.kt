@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -54,7 +55,56 @@ class BottomSheetFragment : BottomSheetDialogFragment(), LikedAdapter.DBListener
     }
 
     override fun longClick(item: TableForDB, view: View) {
-        TODO("Not yet implemented")
+        val popupMenu = PopupMenu(context, view)
+        if (item.inLiked==0 && item.inPath==1){
+            popupMenu.inflate(R.menu.set_delete_menu)
+            popupMenu.setOnMenuItemClickListener{
+                when(it.itemId){
+                    R.id.action_set_in_like->{
+                        tableForDBRepository.updateLiked(item.identification,1)
+                        true
+                    }
+                    R.id.action_delete_from_path->{
+                        tableForDBRepository.updatePath(item.identification,0)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+        else if (item.inLiked==1 && item.inPath == 0){
+            popupMenu.inflate(R.menu.delete_set_menu)
+            popupMenu.setOnMenuItemClickListener{
+                when(it.itemId){
+                    R.id.action_set_in_like->{
+                        tableForDBRepository.updateLiked(item.identification,0)
+                        true
+                    }
+                    R.id.action_delete_from_path->{
+                        tableForDBRepository.updatePath(item.identification,1)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+        else if (item.inLiked==1 && item.inPath == 1){
+            popupMenu.inflate(R.menu.delete_delete_menu)
+            popupMenu.setOnMenuItemClickListener{
+                when(it.itemId){
+                    R.id.action_set_in_like->{
+                        tableForDBRepository.updateLiked(item.identification,0)
+                        true
+                    }
+                    R.id.action_delete_from_path->{
+                        tableForDBRepository.updatePath(item.identification,0)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+        popupMenu.show()
     }
 
 }
