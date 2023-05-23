@@ -5,17 +5,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.RegistrationFragment"
     android:orientation="vertical"
-    android:background="@drawable/enter"
+    android:background="@drawable/new_enter"
     android:gravity="center">
 
     <TextView
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Авторизация"
+        android:text="Регистрация"
         android:layout_gravity="center_horizontal"
         android:textSize="32dp"
         android:textColor="@color/black"/>
     <EditText
+        android:elevation="2dp"
         android:inputType="textEmailAddress"
         android:id="@+id/email"
         android:layout_width="300dp"
@@ -23,8 +25,9 @@
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:hint="Логин"
-        android:background="@color/white"/>
+        android:background="@drawable/shape_text"/>
     <EditText
+        android:elevation="2dp"
         android:inputType="textPassword"
         android:id="@+id/password"
         android:layout_width="300dp"
@@ -32,8 +35,9 @@
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:hint="Пароль"
-        android:background="@color/white"/>
+        android:background="@drawable/shape_text"/>
     <Button
+        android:elevation="2dp"
         android:textColor="@color/black"
         android:textAllCaps="false"
         android:id="@+id/button_reg"
