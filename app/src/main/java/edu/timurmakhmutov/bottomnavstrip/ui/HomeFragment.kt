@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.home
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.Manifest
 import android.os.Bundle
@@ -20,6 +20,9 @@ import com.android.volley.toolbox.Volley
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.adapters.HomePlacesAdapter
 import edu.timurmakhmutov.bottomnavstrip.adapters.ToursAdapter
+import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
+import edu.timurmakhmutov.bottomnavstrip.data_classes.ToursNames
+import edu.timurmakhmutov.bottomnavstrip.isPermissionGranted
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentHomeBinding
 import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
 import org.json.JSONObject

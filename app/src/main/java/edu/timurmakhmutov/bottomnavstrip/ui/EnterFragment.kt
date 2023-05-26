@@ -24,6 +24,7 @@ import java.util.regex.Pattern
 
 class EnterFragment : Fragment() {
 
+    private val tableForDB = TableForDB()
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var baseReference: DatabaseReference
     private lateinit var binding: FragmentEnterBinding
@@ -58,29 +59,18 @@ class EnterFragment : Fragment() {
                                     override fun onDataChange(snapshot: DataSnapshot) {
                                         for (i in snapshot.children) {
                                             parsePlace(i.child("id").value.toString()){
-
-                                                tableForDBRepository.insert(TableForDB(
-                                                    i.child("id").value.toString(),
-                                                    i.child("title").value.toString(),
-                                                    i.child("address").value.toString(),
-                                                    description,
-                                                    i.child("location").value.toString(),
-                                                    ImagesURL.toString().replace("[", "").replace("]", ""),
-                                                    i.child("lat").value.toString(),
-                                                    i.child("lon").value.toString(),
-                                                    i.child("inLiked").value.toString().toInt(),
-                                                    i.child("inPath").value.toString().toInt())
-                                                )
+                                                setTable(i){
+                                                    tableForDB.description = description
+                                                    tableForDB.imageURLs = ImagesURL.toString().replace("[", "").replace("]", "")
+                                                    tableForDBRepository.insert(tableForDB)
+                                                }
                                             }
 
                                         }
                                         findNavController().navigate(R.id.action_enterFragment_to_homeFragment)
                                     }
 
-                                    override fun onCancelled(error: DatabaseError) {
-                                        TODO("Not yet implemented")
-                                    }
-
+                                    override fun onCancelled(error: DatabaseError) {}
                                 })
 
                             }
@@ -129,6 +119,17 @@ class EnterFragment : Fragment() {
     private fun setDes(result: String): String {
         val mainObj = JSONObject(result)
         return mainObj.getString("description").replace("<p>", "").replace("</p>", "")
+    }
+    private fun setTable(i: DataSnapshot, whenSet:()->Unit){
+        tableForDB.identification = i.child("id").value.toString()
+        tableForDB.title = i.child("title").value.toString()
+        tableForDB.address = i.child("address").value.toString()
+        tableForDB.location = i.child("location").value.toString()
+        tableForDB.lat = i.child("lat").value.toString()
+        tableForDB.lon = i.child("lon").value.toString()
+        tableForDB.inLiked = i.child("inLiked").value.toString().toInt()
+        tableForDB.inPath = i.child("inPath").value.toString().toInt()
+        whenSet()
     }
 
 }

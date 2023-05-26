@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.place_screen
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -20,6 +20,7 @@ import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.adapters.CommentsAdapter
 import edu.timurmakhmutov.bottomnavstrip.adapters.ImagePagerAdapter
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
+import edu.timurmakhmutov.bottomnavstrip.data_classes.PlaceCommentsFields
 import edu.timurmakhmutov.bottomnavstrip.view_model.PlaceViewModel
 import kotlinx.android.synthetic.main.fragment_free_trip_screen.*
 import org.json.JSONObject

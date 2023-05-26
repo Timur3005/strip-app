@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.lk
+package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.app.Application
 import android.os.Bundle

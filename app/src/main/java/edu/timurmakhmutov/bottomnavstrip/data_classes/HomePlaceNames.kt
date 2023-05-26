@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.home
+package edu.timurmakhmutov.bottomnavstrip.data_classes
 
 data class HomePlaceNames(
     val placeName: String,

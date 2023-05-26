@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.CommentsBinding
-import edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceCommentsFields
+import edu.timurmakhmutov.bottomnavstrip.data_classes.PlaceCommentsFields
 
 class CommentsAdapter():androidx.recyclerview.widget.ListAdapter<PlaceCommentsFields, CommentsAdapter.PlaceViewHolder>(
     Comparator()) {

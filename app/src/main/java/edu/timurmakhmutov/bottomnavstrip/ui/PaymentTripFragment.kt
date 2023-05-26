@@ -16,7 +16,7 @@ import com.android.volley.toolbox.Volley
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.adapters.FindAdapter
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPaymentTripBinding
-import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
+import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
 import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
 import org.json.JSONObject
 

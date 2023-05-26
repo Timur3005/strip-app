@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.HomeTopForRecyclerBinding
-import edu.timurmakhmutov.bottomnavstrip.home.ToursNames
+import edu.timurmakhmutov.bottomnavstrip.data_classes.ToursNames
 
 class ToursAdapter(val listener: ToursListener) : ListAdapter<ToursNames, ToursAdapter.ToursViewHolder>(
     Comparator()) {

@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.home
+package edu.timurmakhmutov.bottomnavstrip
 
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.HomeTopForRecyclerBinding
-import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
+import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
 
 class HomePlacesAdapter(private val listener: Listener) : ListAdapter<HomePlaceNames, HomePlacesAdapter.HomeNamesHolder>(
     Comparator()) {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.home.HomeFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/LKFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.lk.LKFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.LKFragment"
         android:label="fragment_l_k"
         tools:layout="@layout/fragment_l_k" >
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/placeScreenFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.place_screen.PlaceScreenFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.PlaceScreenFragment"
         android:label="fragment_place_screen"
         tools:layout="@layout/fragment_place_screen" />
     <dialog

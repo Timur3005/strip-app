@@ -2,8 +2,8 @@ package edu.timurmakhmutov.bottomnavstrip.view_model
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
-import edu.timurmakhmutov.bottomnavstrip.home.ToursNames
+import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
+import edu.timurmakhmutov.bottomnavstrip.data_classes.ToursNames
 
 class HomeViewModel : ViewModel() {
 

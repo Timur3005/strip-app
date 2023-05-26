@@ -1,4 +1,4 @@
-package edu.timurmakhmutov.bottomnavstrip.place_screen
+package edu.timurmakhmutov.bottomnavstrip.data_classes
 
 data class PlaceCommentsFields(
     val commenterName: String,

@@ -14,10 +14,10 @@ import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentLogoBinding
-import edu.timurmakhmutov.bottomnavstrip.home.HomePlaceNames
+import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
 import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
-import edu.timurmakhmutov.bottomnavstrip.home.ToursNames
-import edu.timurmakhmutov.bottomnavstrip.home.isPermissionGranted
+import edu.timurmakhmutov.bottomnavstrip.data_classes.ToursNames
+import edu.timurmakhmutov.bottomnavstrip.isPermissionGranted
 import org.json.JSONObject
 
 class LogoFragment : Fragment() {
@@ -42,7 +42,7 @@ class LogoFragment : Fragment() {
         model.toursLoaded.observe(viewLifecycleOwner){tours->
             model.placesLoaded.observe(viewLifecycleOwner){places->
                 if (tours && places && isPermissionGranted((Manifest.permission.ACCESS_FINE_LOCATION))){
-                    model.uId.value = mAuth.currentUser?.uid.toString()
+                    model.uId.value = mAuth.currentUser?.uid
                     findNavController().navigate(R.id.action_logoFragment_to_homeFragment)
                 }
                 else if (tours && places){
