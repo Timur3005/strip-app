@@ -19,12 +19,13 @@
             android:layout_gravity="center"
             android:gravity="center">
             <TextView
+                android:padding="5dp"
                 android:elevation="2dp"
                 android:layout_weight="5"
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Название"
+                android:text="@string/title"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/shape_text"
                 android:textSize="18sp"
@@ -49,15 +50,15 @@
         </LinearLayout>
 
         <TextView
-
+            android:padding="5dp"
             android:elevation="2dp"
             android:id="@+id/location"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Город"
+            android:text="@string/city"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_text"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/black"/>
         <LinearLayout
             android:elevation="2dp"
@@ -75,25 +76,27 @@
                 android:layout_height="match_parent"/>
         </LinearLayout>
         <TextView
+            android:padding="5dp"
             android:elevation="2dp"
             android:id="@+id/address"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Описание"
+            android:text="@string/description"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_text"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"/>
         <TextView
+            android:padding="5dp"
             android:elevation="2dp"
             android:id="@+id/body_text"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Описание"
+            android:text="@string/description"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_text"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"/>
 

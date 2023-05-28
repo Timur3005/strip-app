@@ -92,9 +92,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
                 buildTourRequest(city)
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
 
         }
         binding.typeChillSpinnerMain.onItemSelectedListener=object :
@@ -104,14 +102,13 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
                 homeSpinnerChoice(city,categories)
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
 
         }
         updateData()
     }
 
+    //update recyclers' data
     private fun updateData(){
         model.liveDataHome.observe(viewLifecycleOwner){ places ->
             homePlacesAdapter.submitList(places)
@@ -121,7 +118,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
         }
     }
 
-    //проверка разрешений
+    //check permissions
     private fun permissionListener(){
         pLauncher = registerForActivityResult(
             ActivityResultContracts.
@@ -135,7 +132,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
     }
 
 
-    //инициализация ресайклера
+    //recyclers initialization and filling
     private fun initTopRecycler(){
         binding.recyclerForTopPlacesHome.layoutManager = LinearLayoutManager(context)
         homePlacesAdapter = HomePlacesAdapter(this)
@@ -145,7 +142,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
         toursAdapter = ToursAdapter(this)
         binding.toursRecycler.adapter = toursAdapter
     }
-
     private fun homeSpinnerChoice(location: String, categories: String) {
         val url = "https://kudago.com/public-api/v1.4/places/?lang=" +
                 "&fields=&page_size=100&expand=&order_by=&text_format=text&ids=&location=" + location +
@@ -165,7 +161,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
         )
         queue.add(request)
     }
-
     private fun parseNamesData(result: String): ArrayList<HomePlaceNames> {
         val titles = ArrayList<HomePlaceNames>()
         val namesMainObject = JSONObject(result)
@@ -176,13 +171,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
         }
         return titles
     }
-
-    override fun onClick(item: HomePlaceNames) {
-        val bundle = Bundle()
-        bundle.putString("1",item.placeId)
-        findNavController(binding.root).navigate(R.id.action_homeFragment_to_placeScreenFragment, bundle)
-    }
-
     private fun buildTourRequest(city: String){
         val url = "https://kudago.com/public-api/v1.4/lists/?lang=" +
                 "&fields=&expand=&order_by=&text_format=&ids=" +
@@ -196,7 +184,6 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
         )
         queue.add(request)
     }
-
     private fun parseTours(result: String):ArrayList<ToursNames>{
         val list = kotlin.collections.ArrayList<ToursNames>()
         val namesMainObject = JSONObject(result)
@@ -208,6 +195,13 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
         return list
     }
 
+
+    //click listeners for recyclers
+    override fun onClick(item: HomePlaceNames) {
+        val bundle = Bundle()
+        bundle.putString("1",item.placeId)
+        findNavController(binding.root).navigate(R.id.action_homeFragment_to_placeScreenFragment, bundle)
+    }
     override fun onClick(item: ToursNames) {
         val bundle = Bundle()
         bundle.putString("1", item.id)

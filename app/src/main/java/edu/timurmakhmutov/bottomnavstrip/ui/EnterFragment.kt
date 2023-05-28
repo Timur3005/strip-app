@@ -32,11 +32,12 @@ class EnterFragment : Fragment() {
     private lateinit var ImagesURL:ArrayList<String>
     private lateinit var mAuth: FirebaseAuth
     private val tableForDBRepository = TableForDBRepository(Application())
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         binding = FragmentEnterBinding.inflate(inflater, container, false)
         mAuth = FirebaseAuth.getInstance()
         firebaseDatabase = FirebaseDatabase.getInstance()
@@ -49,6 +50,8 @@ class EnterFragment : Fragment() {
         binding.buttonRegInEnter.setOnClickListener{
             findNavController().navigate(R.id.action_enterFragment_to_registrationFragment)
         }
+
+        //loading user data from firebase
         binding.buttonEnter.setOnClickListener{
             if (isEmail(binding.email.text.toString()) && binding.password.text.toString().isNotEmpty()){
                 mAuth.signInWithEmailAndPassword(binding.email.text.toString(),binding.password.text.toString()).
@@ -84,12 +87,16 @@ class EnterFragment : Fragment() {
             }
         }
     }
+
+    //method for validating email
     private fun isEmail(string: String): Boolean {
         val emailPattern = "^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$"
         val pattern: Pattern = Pattern.compile(emailPattern)
         val matcher: Matcher = pattern.matcher(string)
         return matcher.matches()
     }
+
+    // methods for loading data from api
     private fun parsePlace(identification: String, onPlaceParsed:()->Unit){
         val url = "https://kudago.com/public-api/v1.4/places/$identification/?lang=&fields=&expand="
         val queue = Volley.newRequestQueue(context)
@@ -120,6 +127,10 @@ class EnterFragment : Fragment() {
         val mainObj = JSONObject(result)
         return mainObj.getString("description").replace("<p>", "").replace("</p>", "")
     }
+
+
+
+    //method for set data from firebase to local db
     private fun setTable(i: DataSnapshot, whenSet:()->Unit){
         tableForDB.identification = i.child("id").value.toString()
         tableForDB.title = i.child("title").value.toString()

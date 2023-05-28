@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import edu.timurmakhmutov.bottomnavstrip.R
 
+//adapter for view pager 2
 class ImagePagerAdapter(private val images: ArrayList<String>) : RecyclerView.Adapter<ImagePagerAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {

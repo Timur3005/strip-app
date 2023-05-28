@@ -17,8 +17,8 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Главная"
-            android:textSize="32dp"
+            android:text="@string/main_place"
+            android:textSize="32sp"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"/>
 
@@ -57,9 +57,9 @@
 
                 <TextView
                     android:layout_marginTop="5dp"
-                    android:text="Топ мест"
+                    android:text="@string/top_places"
                     android:textStyle="bold"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -85,9 +85,9 @@
 
                 <TextView
                     android:layout_marginTop="5dp"
-                    android:text="Подборка"
+                    android:text="@string/selections"
                     android:textStyle="bold"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textColor="@color/black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

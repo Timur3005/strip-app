@@ -11,26 +11,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:elevation="2dp"
-            android:id="@+id/title"
+        <LinearLayout
+            android:layout_marginTop="15dp"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Название"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/shape_text"
-            android:textSize="18dp"
-            android:textColor="@color/black"
-            android:layout_marginTop="20dp"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <TextView
+                android:layout_weight="6"
+                android:padding="5dp"
+                android:elevation="2dp"
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/title"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/shape_text"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
+            <Button
+                android:elevation="2dp"
+                android:id="@+id/add_to_like_place_screen"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ic_baseline_star_24"
+                android:textSize="15sp"/>
+            <Button
+                android:elevation="2dp"
+                android:id="@+id/add_to_path"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ic_baseline_bookmark_border_24"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
         <TextView
+            android:padding="5dp"
             android:elevation="2dp"
             android:id="@+id/location"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Город"
+            android:text="@string/city"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_text"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_marginTop="15dp"/>
         <androidx.viewpager2.widget.ViewPager2
@@ -44,50 +70,29 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"/>
         <TextView
+            android:padding="5dp"
             android:elevation="2dp"
             android:id="@+id/address"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Описание"
+            android:text="@string/description"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_text"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_marginTop="15dp"/>
         <TextView
+            android:padding="5dp"
             android:elevation="2dp"
             android:id="@+id/body_text"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Описание"
+            android:text="@string/description"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/shape_text"
-            android:textSize="18dp"
+            android:textSize="18sp"
             android:textColor="@color/black"
             android:layout_marginTop="15dp"/>
-        <Button
-            android:elevation="2dp"
-            android:id="@+id/add_to_like_place_screen"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/shape_for_button"
-            android:text="Удалить из избранного"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-        <Button
-            android:elevation="2dp"
-            android:id="@+id/add_to_path"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/shape_for_button"
-            android:text="Добавить в маршрут"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:layout_marginBottom="10dp"/>
     </LinearLayout>
 
 </ScrollView>

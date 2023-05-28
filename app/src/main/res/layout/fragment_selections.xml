@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.FreeTripScreenFragment"
+    tools:context=".ui.SelectionsFragment"
     android:orientation="vertical"
     android:background="@color/green1">
 
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/shape_text"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textColor="@color/black"
         android:layout_margin="10dp"/>
     <Button
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/shape_for_button"
-        android:text="Перейти на сайт"
+        android:text="@string/go_to_site"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="15sp"

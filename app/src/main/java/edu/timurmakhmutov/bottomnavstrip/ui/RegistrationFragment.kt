@@ -38,6 +38,8 @@ class RegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //account initialization if firebase auth
         binding.buttonReg.setOnClickListener{
             if (isEmail(binding.email.text.toString()) && binding.password.text.toString().isNotEmpty()
                 && binding.password.text.toString().length>5){

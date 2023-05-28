@@ -2,6 +2,30 @@
     <string name="app_name">BottomNavStrip</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="path">Маршрут</string>
+    <string name="go_to_site">Перейти на сайт</string>
+    <string name="registration">Регистрация</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="title">Название</string>
+    <string name="city">Город</string>
+    <string name="description">Описание</string>
+    <string name="delete_from_liked">Удалить из избранного</string>
+    <string name="add_to_path">Добавить в маршрут</string>
+    <string name="lk">Личный кабинет</string>
+    <string name="your_path">Ваш маршрут</string>
+    <string name="liked">Избранное</string>
+    <string name="main_place">Главная</string>
+    <string name="top_places">Топ мест</string>
+    <string name="selections">Подборка</string>
+    <string name="search">Поиск</string>
+    <string name="write_request">Введите свой запрос</string>
+    <string name="result_search">Результат поиска</string>
+    <string name="auth">Авторизация</string>
+    <string name="enter">Войти</string>
+    <string name="delete_from_path">Удалить из маршрута</string>
+    <string name="state_trip">Ход маршрута</string>
+    <string name="add_to_liked">Добавить в избранное</string>
     <string-array name="cities_array">
         <item>Выберите город</item>
         <item>Москва</item>

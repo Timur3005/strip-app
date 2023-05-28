@@ -17,7 +17,7 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Личный кабинет"
+            android:text="@string/lk"
             android:textSize="32sp"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"/>
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Ваш маршрут"
+                android:text="@string/your_path"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -64,7 +64,7 @@
             <TextView
                 android:textStyle="bold"
                 android:layout_marginTop="10dp"
-                android:text="Избранное"
+                android:text="@string/liked"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"

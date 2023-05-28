@@ -1,6 +1,7 @@
 package edu.timurmakhmutov.bottomnavstrip.ui
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import com.yandex.mapkit.geometry.Point
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentLogoBinding
 import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
@@ -22,6 +26,7 @@ import org.json.JSONObject
 
 class LogoFragment : Fragment() {
 
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val model: HomeViewModel by activityViewModels()
     private lateinit var mAuth: FirebaseAuth
     private lateinit var binding: FragmentLogoBinding
@@ -35,12 +40,16 @@ class LogoFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        homeSpinnerChoice()
+        dataLoading()
         buildTourRequest()
+
+        // check for data loading from api, if everything is loaded, then there is a transition to another screen
         model.toursLoaded.observe(viewLifecycleOwner){tours->
             model.placesLoaded.observe(viewLifecycleOwner){places->
+
                 if (tours && places && isPermissionGranted((Manifest.permission.ACCESS_FINE_LOCATION))){
                     model.uId.value = mAuth.currentUser?.uid
                     findNavController().navigate(R.id.action_logoFragment_to_homeFragment)
@@ -49,9 +58,10 @@ class LogoFragment : Fragment() {
                     findNavController().navigate(R.id.action_logoFragment_to_enterFragment)
                 }
             }
-
         }
     }
+
+    //methods for loading from api
     private fun buildTourRequest(){
         val url = "https://kudago.com/public-api/v1.4/lists/?lang=" +
                 "&fields=&expand=&order_by=&text_format=&ids=" +
@@ -67,7 +77,6 @@ class LogoFragment : Fragment() {
         )
         queue.add(request)
     }
-
     private fun parseTours(result: String):ArrayList<ToursNames>{
         val list = kotlin.collections.ArrayList<ToursNames>()
         val namesMainObject = JSONObject(result)
@@ -78,7 +87,7 @@ class LogoFragment : Fragment() {
         }
         return list
     }
-    private fun homeSpinnerChoice() {
+    private fun dataLoading() {
         val url = "https://kudago.com/public-api/v1.4/places/?lang=" +
                 "&fields=&page_size=100&expand=&order_by=&text_format=text&ids=&location="+
                 "&has_showings=&showing_since=1444385206&showing_until=1444385206" +
@@ -99,7 +108,6 @@ class LogoFragment : Fragment() {
         )
         queue.add(request)
     }
-
     private fun parseNamesData(result: String): ArrayList<HomePlaceNames> {
         val titles = ArrayList<HomePlaceNames>()
         val namesMainObject = JSONObject(result)

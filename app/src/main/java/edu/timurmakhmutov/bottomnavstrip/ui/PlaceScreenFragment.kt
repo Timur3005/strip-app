@@ -22,7 +22,7 @@ import edu.timurmakhmutov.bottomnavstrip.adapters.ImagePagerAdapter
 import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPlaceScreenBinding
 import edu.timurmakhmutov.bottomnavstrip.data_classes.PlaceCommentsFields
 import edu.timurmakhmutov.bottomnavstrip.view_model.PlaceViewModel
-import kotlinx.android.synthetic.main.fragment_free_trip_screen.*
+import kotlinx.android.synthetic.main.fragment_selections.*
 import org.json.JSONObject
 
 class PlaceScreenFragment : Fragment(){
@@ -53,6 +53,7 @@ class PlaceScreenFragment : Fragment(){
         initComments()
         updateData()
 
+        //user's work with elected
         tableForDBRepository.getById(trueId).observe(viewLifecycleOwner, Observer {item->
             if (item == null) {
                 var liked = 0
@@ -146,18 +147,20 @@ class PlaceScreenFragment : Fragment(){
             }
         })
     }
+
+    //recycler filling
     private fun updateData(){
         model.liveDataCommentsFields.observe(viewLifecycleOwner){
             commentsAdapter.submitList(it)
         }
     }
-
     private fun initComments(){
         fragmentPlaceScreenBinding.recyclerForComments.layoutManager = LinearLayoutManager(context)
         commentsAdapter = CommentsAdapter()
         fragmentPlaceScreenBinding.recyclerForComments.adapter = commentsAdapter
     }
 
+    //methods for loading data from api
     private fun parsePlace(identification: String){
 
         val url = "https://kudago.com/public-api/v1.4/places/$identification/?lang=&fields=&expand="

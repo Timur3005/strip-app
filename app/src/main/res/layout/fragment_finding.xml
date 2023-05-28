@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.PaymentTripFragment"
+    tools:context=".ui.FindingFragment"
     android:orientation="vertical"
     android:background="@color/green1">
 
@@ -11,7 +11,7 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Поиск"
+        android:text="@string/search"
         android:textColor="@color/black"
         android:textSize="32sp"
         android:layout_marginTop="10dp"
@@ -23,13 +23,13 @@
         android:layout_gravity="center"
         android:orientation="horizontal">
         <EditText
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:elevation="2dp"
             android:layout_weight="12"
             android:id="@+id/search_place"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:hint="Введите свой запрос"
+            android:hint="@string/write_request"
             android:background="@drawable/shape_text"/>
         <Button
             android:elevation="2dp"
@@ -37,7 +37,7 @@
             android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Поиск"
+            android:text="@string/search"
             android:textColor="@color/black"
             android:textAllCaps="false"/>
     </LinearLayout>
@@ -58,7 +58,7 @@
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Результат поиска"
+            android:text="@string/result_search"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"/>
         <androidx.recyclerview.widget.RecyclerView

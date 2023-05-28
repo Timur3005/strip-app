@@ -15,22 +15,24 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.adapters.FindAdapter
-import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentPaymentTripBinding
 import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
+import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentFindingBinding
 import edu.timurmakhmutov.bottomnavstrip.view_model.HomeViewModel
 import org.json.JSONObject
 
-class PaymentTripFragment : Fragment(), FindAdapter.FindListener {
+class FindingFragment : Fragment(), FindAdapter.FindListener {
 
     private lateinit var adapter: FindAdapter
     private val model: HomeViewModel by activityViewModels()
-    private lateinit var binding: FragmentPaymentTripBinding
+    private lateinit var binding: FragmentFindingBinding
 
+
+    // implementation of api search and displaying the results on the screen
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPaymentTripBinding.inflate(inflater, container, false)
+        binding = FragmentFindingBinding.inflate(inflater, container, false)
         if (binding.searchPlace.text!=null) {
             model.searchPlace.value = binding.searchPlace.text.toString()
         }

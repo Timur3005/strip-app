@@ -9,7 +9,8 @@ import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.CommentsBinding
 import edu.timurmakhmutov.bottomnavstrip.data_classes.PlaceCommentsFields
 
-class CommentsAdapter():androidx.recyclerview.widget.ListAdapter<PlaceCommentsFields, CommentsAdapter.PlaceViewHolder>(
+//adapter for comments to place
+class CommentsAdapter :androidx.recyclerview.widget.ListAdapter<PlaceCommentsFields, CommentsAdapter.PlaceViewHolder>(
     Comparator()) {
 
     class PlaceViewHolder(view: View):RecyclerView.ViewHolder(view){

@@ -10,6 +10,7 @@ import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.HomeTopForRecyclerBinding
 import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
 
+// adapter for search
 class FindAdapter(private val listener: FindListener): ListAdapter<HomePlaceNames, FindAdapter.FindViewHolder>(
     Comparator()) {
 

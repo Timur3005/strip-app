@@ -39,6 +39,7 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
     private lateinit var drivingSession: DrivingSession
 
 
+    // work with mapkit
     @SuppressLint("InflateParams")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +50,8 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         fragmentStateTripBinding.mapview
         drivingRouter = DirectionsFactory.getInstance().createDrivingRouter()
         mapObjects = fragmentStateTripBinding.mapview.map.mapObjects
+
+        //show the path's elements
         fragmentStateTripBinding.activateSheet.setOnClickListener {
             findNavController().navigate(R.id.action_stateTripFragment_to_bottomSheetFragment)
         }
@@ -98,6 +101,9 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         val error = "Неизвестная ошибка"
         Toast.makeText(context, error, Toast.LENGTH_LONG).show()
     }
+
+
+    // routing users
     @SuppressLint("MissingPermission")
     private fun racoord(){
         tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer { result->
@@ -140,15 +146,9 @@ class StateTripFragment : Fragment(), DrivingSession.DrivingRouteListener, UserL
         })
     }
 
-    override fun onObjectAdded(p0: UserLocationView) {
+    override fun onObjectAdded(p0: UserLocationView) {}
 
-    }
+    override fun onObjectRemoved(p0: UserLocationView) {}
 
-    override fun onObjectRemoved(p0: UserLocationView) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {
-        TODO("Not yet implemented")
-    }
+    override fun onObjectUpdated(p0: UserLocationView, p1: ObjectEvent) {}
 }

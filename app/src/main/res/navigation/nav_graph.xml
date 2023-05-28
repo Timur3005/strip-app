@@ -49,9 +49,9 @@
     </fragment>
     <fragment
         android:id="@+id/paymentTripFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.ui.PaymentTripFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.FindingFragment"
         android:label="fragment_payment_trip"
-        tools:layout="@layout/fragment_payment_trip" >
+        tools:layout="@layout/fragment_finding" >
         <action
             android:id="@+id/action_paymentTripFragment_to_placeScreenFragment"
             app:destination="@id/placeScreenFragment" />
@@ -63,9 +63,9 @@
         tools:layout="@layout/fragment_place_screen" />
     <dialog
         android:id="@+id/freeTripScreenFragment"
-        android:name="edu.timurmakhmutov.bottomnavstrip.ui.FreeTripScreenFragment"
+        android:name="edu.timurmakhmutov.bottomnavstrip.ui.SelectionsFragment"
         android:label="fragment_free_trip_screen"
-        tools:layout="@layout/fragment_free_trip_screen" />
+        tools:layout="@layout/fragment_selections" />
     <fragment
         android:id="@+id/enterFragment"
         android:name="edu.timurmakhmutov.bottomnavstrip.ui.EnterFragment"

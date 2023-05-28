@@ -12,9 +12,9 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Регистрация"
+        android:text="@string/registration"
         android:layout_gravity="center_horizontal"
-        android:textSize="32dp"
+        android:textSize="32sp"
         android:textColor="@color/black"/>
     <EditText
         android:elevation="2dp"
@@ -24,7 +24,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:hint="Логин"
+        android:hint="@string/login"
         android:background="@drawable/shape_text"/>
     <EditText
         android:elevation="2dp"
@@ -34,7 +34,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
-        android:hint="Пароль"
+        android:hint="@string/password"
         android:background="@drawable/shape_text"/>
     <Button
         android:elevation="2dp"
@@ -44,9 +44,9 @@
         android:layout_width="300dp"
         android:layout_marginTop="10dp"
         android:layout_height="40dp"
-        android:text="Регистрация"
+        android:text="@string/registration"
         android:background="@drawable/shape_for_button"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="normal"
         android:layout_gravity="center_horizontal" />
 

@@ -36,16 +36,22 @@ class LKFragment : Fragment(), LikedAdapter.DBListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val tableForDBRepository = TableForDBRepository(Application())
+
+        //selected showing
         tableForDBRepository.allLiked.observe(viewLifecycleOwner, Observer { tableForDBS ->
             model.liveDataLiked.value = tableForDBS
             initRecyclerLiked()
             updateLiked()
         })
+
+        //path showing
         tableForDBRepository.allPaths.observe(viewLifecycleOwner, Observer {
             model.liveDataPath.value = it
             initRecyclerPath()
             updatePath()
         })
+
+        // local db cleaning
         tableForDBRepository.allTables.observe(viewLifecycleOwner, Observer {
             for (item in it){
                 if (item.inLiked==0 && item.inPath==0){
@@ -56,6 +62,8 @@ class LKFragment : Fragment(), LikedAdapter.DBListener {
 
 
     }
+
+    //selected and path recyclers initialization
     private fun initRecyclerLiked(){
         likedAdapter = LikedAdapter(this)
         lkBinding.recyclerForLikedInLk.layoutManager = LinearLayoutManager(context)
@@ -77,12 +85,15 @@ class LKFragment : Fragment(), LikedAdapter.DBListener {
         }
     }
 
+
+    //click listeners for recycler`s items
+    //short click
     override fun dbOnClick(item: TableForDB) {
         val bundle = Bundle()
         bundle.putString("1",item.identification)
         findNavController(lkBinding.root).navigate(R.id.action_LKFragment_to_placeCardInLKFragment, bundle)
     }
-
+    //long click
     override fun longClick(item: TableForDB, view: View) {
         val popupMenu = PopupMenu(context, view)
         if (item.inLiked==0 && item.inPath==1){

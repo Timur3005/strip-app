@@ -11,25 +11,25 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentFreeTripScreenBinding
+import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentSelectionsBinding
 import org.json.JSONObject
 
-class FreeTripScreenFragment : BottomSheetDialogFragment() {
+// BottomSheetDialogFragment for show selection descriptions
+class SelectionsFragment : BottomSheetDialogFragment() {
 
-    private lateinit var fragmentFreeTripScreenBinding: FragmentFreeTripScreenBinding
+    private lateinit var binding: FragmentSelectionsBinding
     private var id: String? = null
-    private var tourLink: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        fragmentFreeTripScreenBinding =
-            FragmentFreeTripScreenBinding.inflate(inflater, container, false)
+
+        binding =
+            FragmentSelectionsBinding.inflate(inflater, container, false)
 
         id = arguments?.getString("1")
-        return fragmentFreeTripScreenBinding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -57,16 +57,16 @@ class FreeTripScreenFragment : BottomSheetDialogFragment() {
         val description: String? = namesMainObject.getString("description")
         val url: String? = namesMainObject.getString("site_url")
         if (description!=null && url!=null) {
-            fragmentFreeTripScreenBinding.description.text =
+            binding.description.text =
                 description.replace("<p>", "").replace("</p>", "")
-            fragmentFreeTripScreenBinding.startInFreeTripScreen.setOnClickListener{
+            binding.startInFreeTripScreen.setOnClickListener{
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 startActivity(intent)
             }
         }
         else {
-            fragmentFreeTripScreenBinding.startInFreeTripScreen.isVisible = false
-            fragmentFreeTripScreenBinding.description.text = "Ошибка сервиса"
+            binding.startInFreeTripScreen.isVisible = false
+            binding.description.text = "Ошибка сервиса"
         }
     }
 }

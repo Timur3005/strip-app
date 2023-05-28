@@ -10,7 +10,8 @@ import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.HomeTopForRecyclerBinding
 import edu.timurmakhmutov.bottomnavstrip.data_classes.ToursNames
 
-class ToursAdapter(val listener: ToursListener) : ListAdapter<ToursNames, ToursAdapter.ToursViewHolder>(
+//adapter for selections
+class ToursAdapter(private val listener: ToursListener) : ListAdapter<ToursNames, ToursAdapter.ToursViewHolder>(
     Comparator()) {
 
     class ToursViewHolder(view: View): RecyclerView.ViewHolder(view) {

@@ -11,6 +11,8 @@ import edu.timurmakhmutov.bottomnavstrip.DataBase.TableForDB
 import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.LikedItemBinding
 
+
+//adapter for elected places
 internal class LikedAdapter(private val listener: DBListener): ListAdapter<TableForDB, LikedAdapter.LikedViewHolder>(
     Comparator()) {
     class LikedViewHolder(view:View): RecyclerView.ViewHolder(view){

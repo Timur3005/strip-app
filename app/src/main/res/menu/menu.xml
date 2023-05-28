@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Главная"
+        android:title="@string/main_place"
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_baseline_home_24"/>
     <item
-        android:title="Личный кабинет"
+        android:title="@string/lk"
         android:id="@+id/LKFragment"
         android:icon="@drawable/ic_baseline_person_24"/>
     <item
-        android:title="Ход маршрута"
+        android:title="@string/state_trip"
         android:id="@+id/stateTripFragment"
         android:icon="@drawable/ic_baseline_mode_of_travel_24"/>
     <item
-        android:title="Поиск"
+        android:title="@string/search"
         android:id="@+id/paymentTripFragment"
         android:icon="@drawable/ic_baseline_find_in_page_24"/>
 </menu>

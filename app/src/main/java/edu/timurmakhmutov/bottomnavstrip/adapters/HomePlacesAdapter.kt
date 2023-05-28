@@ -10,6 +10,8 @@ import edu.timurmakhmutov.bottomnavstrip.R
 import edu.timurmakhmutov.bottomnavstrip.databinding.HomeTopForRecyclerBinding
 import edu.timurmakhmutov.bottomnavstrip.data_classes.HomePlaceNames
 
+
+//adapter for places recycler
 class HomePlacesAdapter(private val listener: Listener) : ListAdapter<HomePlaceNames, HomePlacesAdapter.HomeNamesHolder>(
     Comparator()) {
 

@@ -18,6 +18,7 @@ import edu.timurmakhmutov.bottomnavstrip.databinding.FragmentBottomSheetBinding
 import edu.timurmakhmutov.bottomnavstrip.view_model.LKViewModel
 import edu.timurmakhmutov.bottomnavstrip.adapters.LikedAdapter
 
+// BottomSheetDialogFragment for show and edit path in StateTripFragment
 class BottomSheetFragment : BottomSheetDialogFragment(), LikedAdapter.DBListener {
 
     private val tableForDBRepository = TableForDBRepository(Application())
