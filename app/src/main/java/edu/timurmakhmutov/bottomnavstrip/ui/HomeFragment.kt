@@ -151,7 +151,7 @@ class HomeFragment : Fragment(), HomePlacesAdapter.Listener, ToursAdapter.ToursL
                 "&lon=" +
                 "&lat=" +
                 "&radius="
-        val queue = Volley.newRequestQueue(context)
+        val queue = Volley.newRequestQueue(requireContext())
         val request = StringRequest(
             Request.Method.GET,
             url,

@@ -66,7 +66,7 @@ class LogoFragment : Fragment() {
         val url = "https://kudago.com/public-api/v1.4/lists/?lang=" +
                 "&fields=&expand=&order_by=&text_format=&ids=" +
                 "&location="
-        val queue = Volley.newRequestQueue(context)
+        val queue = Volley.newRequestQueue(requireContext())
         val request = StringRequest(
             Request.Method.GET,
             url,
@@ -96,7 +96,7 @@ class LogoFragment : Fragment() {
                 "&lon=" +
                 "&lat=" +
                 "&radius="
-        val queue = Volley.newRequestQueue(context)
+        val queue = Volley.newRequestQueue(requireContext())
         val request = StringRequest(
             Request.Method.GET,
             url,

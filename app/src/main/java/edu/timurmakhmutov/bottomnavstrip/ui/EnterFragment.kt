@@ -78,12 +78,12 @@ class EnterFragment : Fragment() {
 
                             }
                             else{
-                                Toast.makeText(context, "Ошибка", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), "Ошибка", Toast.LENGTH_SHORT).show()
                             }
                         }
             }
             else{
-                Toast.makeText(context,"Вы ввели некорректные данные", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Вы ввели некорректные данные", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -98,20 +98,23 @@ class EnterFragment : Fragment() {
 
     // methods for loading data from api
     private fun parsePlace(identification: String, onPlaceParsed:()->Unit){
-        val url = "https://kudago.com/public-api/v1.4/places/$identification/?lang=&fields=&expand="
-        val queue = Volley.newRequestQueue(context)
-        val request = StringRequest(
-            Request.Method.GET,
-            url,
-            { result ->
-                ImagesURL = setMyData(result)
-                description = setDes(result)
-                onPlaceParsed()
+        if (isAdded) {
+            val url =
+                "https://kudago.com/public-api/v1.4/places/$identification/?lang=&fields=&expand="
+            val queue = Volley.newRequestQueue(requireContext())
+            val request = StringRequest(
+                Request.Method.GET,
+                url,
+                { result ->
+                    ImagesURL = setMyData(result)
+                    description = setDes(result)
+                    onPlaceParsed()
 
-            },
-            { error -> Log.d("MyTaggg", "error $error") }
-        )
-        queue.add(request)
+                },
+                { error -> Log.d("MyTaggg", "error $error") }
+            )
+            queue.add(request)
+        }
     }
     private fun setMyData(result: String):ArrayList<String>{
         val list = ArrayList<String>()

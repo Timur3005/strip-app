@@ -62,7 +62,7 @@ class FindingFragment : Fragment(), FindAdapter.FindListener {
 
     private fun mainFindParse(response: String) {
         val url = "https://kudago.com/public-api/v1.4/search/?q=$response&lang=&expand=&location=&ctype=place&is_free=&lat=&lon=&radius="
-        val queue = Volley.newRequestQueue(context)
+        val queue = Volley.newRequestQueue(requireContext())
         val request = StringRequest(
             Request.Method.GET,
             url,

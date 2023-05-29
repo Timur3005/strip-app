@@ -164,7 +164,7 @@ class PlaceScreenFragment : Fragment(){
     private fun parsePlace(identification: String){
 
         val url = "https://kudago.com/public-api/v1.4/places/$identification/?lang=&fields=&expand="
-        val queue = Volley.newRequestQueue(context)
+        val queue = Volley.newRequestQueue(requireContext())
         val request = StringRequest(
             Request.Method.GET,
             url,
@@ -196,7 +196,7 @@ class PlaceScreenFragment : Fragment(){
     private fun parseComments(identification: String){
 
         val url = "https://kudago.com/public-api/v1.4/places/$identification/comments/?lang=&fields=&order_by=&ids="
-        val newQueue = Volley.newRequestQueue(context)
+        val newQueue = Volley.newRequestQueue(requireContext())
         val request = StringRequest(
             Request.Method.GET,
             url,

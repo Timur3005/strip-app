@@ -40,7 +40,7 @@ class SelectionsFragment : BottomSheetDialogFragment() {
     private fun workWithApi(id: String){
         val url ="https://kudago.com/public-api/v1.4/lists/" + id +
                 "/?lang=&fields=&expand="
-        val queue = Volley.newRequestQueue(context)
+        val queue = Volley.newRequestQueue(requireContext())
         val request = StringRequest(
             Request.Method.GET,
             url,
